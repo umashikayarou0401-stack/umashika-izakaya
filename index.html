@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>うましかやろう BAR＆居酒屋 Part 2</title>
+  <meta name="description" content="劇団うましかやろうの居酒屋イベント『BAR＆居酒屋 Part 2』特設サイト。">
+  <meta name="theme-color" content="#ead4ad">
+  <meta property="og:title" content="うましかやろう BAR＆居酒屋 Part 2">
+  <meta property="og:description" content="12/5(土) 15:00〜22:30｜会場：うずめ｜料金：2,500円（ワンドリンク付き）">
+  <meta property="og:image" content="assets/event-poster.jpg">
+  <link rel="icon" href="assets/event-poster.jpg">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Yuji+Boku&display=swap");
+    @font-face{
+      font-family:"桜鯰";
+      src:url("assets/Ounen-mouhitsu.otf") format("opentype");
+      font-style:normal;
+      font-weight:400 900;
+      font-display:swap;
+    }
+
+    :root{
+      --paper:#ead4ad;
+      --paper-light:#f7ecd8;
+      --ink:#17120e;
+      --brown:#70462b;
+      --brown-light:#a67952;
+      --orange:#e68a1e;
+      --green:#5e7562;
+      --red:#a85035;
+      --line:rgba(60,35,17,.70);
+      --hand:"桜鯰","Yuji Boku",serif;
+      --shadow:0 18px 40px rgba(55,31,13,.14);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255,255,255,.32), transparent 30%),
+        radial-gradient(circle at 78% 8%, rgba(255,255,255,.28), transparent 24%),
+        repeating-linear-gradient(0deg, rgba(78,46,23,.028) 0 2px, transparent 2px 6px),
+        linear-gradient(180deg,#efdcbc 0%,#ecd4ac 55%,#e7cd9f 100%);
+      font-family:var(--hand);
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.14;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+      mix-blend-mode:multiply;
+      z-index:300;
+    }
+    a{color:inherit}
+    button{font:inherit}
+    img{max-width:100%}
+    .hand{font-family:var(--hand);font-weight:900;letter-spacing:.025em;-webkit-text-stroke:.32px currentColor;text-shadow:0 .3px 0 currentColor}
+    .wrap{width:min(1060px,92vw);margin-inline:auto}
+
+    /* ===== FIRST VIEW ===== */
+    .hero{
+      min-height:100svh;
+      display:grid;
+      place-items:center;
+      padding:2rem 1rem 5rem;
+      position:relative;
+    }
+    .hero-poster{
+      width:min(520px,88vw);
+      padding:10px;
+      position:relative;
+      opacity:0;
+      transform:translateY(30px) scale(.97) rotate(1.6deg);
+      filter:blur(4px);
+      animation:posterIn 1.55s cubic-bezier(.17,.84,.23,1) .12s forwards;
+    }
+    .hero-poster::before{
+      content:"";
+      position:absolute;
+      inset:3px;
+      border:1px solid rgba(66,39,20,.14);
+      transform:rotate(-.8deg);
+      pointer-events:none;
+    }
+    .hero-poster::after{
+      content:"";
+      position:absolute;
+      inset:14px;
+      box-shadow:0 22px 55px rgba(65,37,15,.18);
+      z-index:-1;
+      border-radius:4px;
+    }
+    .hero-poster img{display:block;width:100%;height:auto;background:#f6e7c9}
+    @keyframes posterIn{
+      0%{opacity:0;transform:translateY(34px) scale(.965) rotate(1.6deg);filter:blur(5px)}
+      75%{opacity:1;transform:translateY(-3px) scale(1.002) rotate(1.1deg);filter:blur(0)}
+      100%{opacity:1;transform:translateY(0) scale(1) rotate(1.3deg);filter:blur(0)}
+    }
+
+    /* ===== BOTTOM SHORTCUT NAV ===== */
+    .bottom-nav{
+      position:fixed;
+      z-index:140;
+      left:50%;
+      bottom:14px;
+      transform:translate(-50%,18px);
+      width:min(720px,calc(100vw - 28px));
+      padding:7px;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:5px;
+      border:1px solid rgba(80,46,23,.18);
+      border-radius:24px;
+      background:rgba(250,240,220,.90);
+      backdrop-filter:blur(12px);
+      box-shadow:0 16px 35px rgba(60,35,17,.16);
+      opacity:0;
+      pointer-events:none;
+      transition:.3s ease;
+    }
+    body.is-scrolled .bottom-nav{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+    .nav-item{
+      min-width:0;border:0;border-radius:18px;background:transparent;color:var(--ink);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:4px 3px 3px;text-decoration:none;cursor:pointer;
+      transition:transform .18s ease, background .18s ease;
+    }
+    .nav-item:hover,.nav-item:focus-visible{background:rgba(255,255,255,.55);transform:translateY(-2px)}
+    .nav-art{width:44px;height:44px;object-fit:contain;display:block;filter:drop-shadow(0 3px 2px rgba(50,30,14,.12))}
+    .nav-item span{font-size:11px;line-height:1.05;margin-top:-1px;white-space:nowrap}
+
+    /* ===== SECTIONS ===== */
+    section{padding:110px 0;position:relative}
+    .section-head{text-align:center;margin-bottom:44px}
+    .section-head h2{
+      margin:0;
+      font-size:clamp(42px,6vw,68px);
+      line-height:1;
+      display:inline-block;
+      position:relative;
+    }
+    .section-head h2::after{
+      content:"";
+      display:block;
+      width:120px;
+      height:8px;
+      margin:10px auto 0;
+      border-bottom:4px solid var(--ink);
+      border-radius:50%;
+      transform:rotate(-2deg);
+    }
+    .section-head p{max-width:680px;margin:22px auto 0;font-size:14px;line-height:2;opacity:.72}
+
+    /* ===== ABOUT ===== */
+    #about{padding-top:120px}
+    .about-paper{width:min(820px,100%);margin-inline:auto;padding:18px 16px 10px;text-align:center}
+    .about-paper p{font-size:18px;line-height:2.15;margin:0 0 26px}
+    .about-paper p:last-child{margin-bottom:0}
+    .about-paper strong{font-weight:900}
+
+    /* ===== TIMELINE ===== */
+    .timeline-wrap{position:relative;max-width:980px;margin:0 auto;padding-top:8px}
+    .timeline-wrap::before{
+      content:"";position:absolute;top:0;bottom:124px;left:50%;width:3px;
+      transform:translateX(-50%);background:var(--line);z-index:0}
+    .time-row{min-height:210px;position:relative}
+    .time-row:not(.last)::after{
+      content:"";position:absolute;top:74%;height:3px;background:var(--line);
+      transform:translateY(-50%);z-index:1;border-radius:999px}
+    .time-row.left::after{right:50%;width:34%}
+    .time-row.right::after{left:50%;width:34%}
+    .time-card{
+      position:absolute;bottom:26%;width:33%;padding:0 6px;z-index:3;
+      background:transparent;border-radius:0;text-align:center}
+    .time-row.left .time-card{right:calc(50% + 24px)}
+    .time-row.right .time-card{left:calc(50% + 24px)}
+    .time-icon{
+      position:absolute;top:74%;width:84px;height:84px;border-radius:50%;
+      transform:translate(-50%,-50%);display:grid;place-items:center;
+      background:rgba(250,239,217,.98);border:2px solid rgba(46,25,11,.18);
+      box-shadow:0 8px 22px rgba(55,31,13,.13);z-index:3}
+    .time-row.left .time-icon{left:16%}
+    .time-row.right .time-icon{left:84%}
+    .time-icon img{width:74px;height:74px;object-fit:contain}
+    .time-card .time{display:block;font-size:27px;font-weight:900;line-height:1;margin-bottom:7px;-webkit-text-stroke:.4px currentColor;text-shadow:0 .4px 0 currentColor}
+    .time-card h3{font-size:31px;margin:0 0 5px;line-height:1.08;-webkit-text-stroke:.4px currentColor;text-shadow:0 .4px 0 currentColor}
+    .time-card p{font-size:13px;line-height:1.45;opacity:.68;margin:0}
+
+    .time-row.last{min-height:200px}
+    .time-row.last .time-card{
+      left:50%;top:28px;bottom:auto;width:max-content;max-width:78%;
+      transform:translateX(-50%);padding:2px 18px 6px;z-index:6;
+      background:var(--paper);border-radius:10px;
+    }
+    .time-row.last .time-card > *{text-shadow:none}
+    .time-row.last .time-icon{left:50%;top:74%;z-index:3}
+    .time-row.last::after{display:none}
+    .brush-note{margin:20px auto 0;max-width:720px;text-align:center;font-size:12px;opacity:.55}
+
+    /* ===== MENU ===== */
+    .menu-stage{display:grid;place-items:center;min-height:590px}
+    .menu-book-btn{
+      border:0;background:none;cursor:pointer;padding:0;position:relative;
+      width:min(520px,88vw);aspect-ratio:1/1;display:grid;place-items:center;transition:transform .25s ease;overflow:visible
+    }
+    .menu-book-btn:hover{transform:rotate(-.7deg) translateY(-5px)}
+    .menu-book-btn img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 24px 28px rgba(56,30,11,.2))}
+    .menu-book-overlay{
+      position:absolute;left:19%;width:61%;top:31%;
+      transform:rotate(-9.5deg);text-align:center;color:#fff4d8;pointer-events:none;
+      text-shadow:2px 2px 0 #432415,0 5px 12px rgba(48,21,7,.30);
+    }
+    .menu-book-overlay .big{font-size:clamp(34px,5.5vw,54px);line-height:.96;white-space:nowrap;letter-spacing:0}
+    .menu-book-overlay .small{font-size:11px;line-height:1.25;margin-top:16px;color:#fff4d8;text-shadow:1px 1px 0 #432415,0 2px 6px rgba(42,20,8,.28);white-space:nowrap}
+    .menu-book-hint{margin-top:-26px;text-align:center;font-size:13px;opacity:.6;letter-spacing:.06em}
+
+    /* ===== VENUE ===== */
+    .venue-stack{display:grid;gap:30px;max-width:900px;margin:0 auto}
+    .venue-card{text-align:center;padding:20px 20px 24px;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);background:rgba(255,248,235,.28)}
+    .venue-price{font-size:clamp(56px,8vw,88px);line-height:.95;font-weight:900}
+    .venue-price span{font-size:22px;margin-left:5px}
+    .venue-tag{display:inline-block;margin-top:8px;font-size:13px;padding:5px 12px;border:1.5px solid var(--ink);border-radius:999px;transform:rotate(-2deg)}
+    .venue-name{font-size:38px;margin:22px 0 8px}
+    .venue-name a{text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+    .venue-name a::after{content:"↗";font-size:.5em;transform:translateY(-1px)}
+    .venue-address{font-size:14px;line-height:1.9;margin:0}
+    .map-frame{min-height:390px;border:5px solid var(--paper-light);box-shadow:var(--shadow);overflow:hidden;background:#d7c4a4;position:relative}
+    .map-frame iframe{width:100%;height:390px;border:0;filter:saturate(.72) sepia(.1)}
+    .map-caption{padding:10px 5px 0;text-align:center;font-size:11px;opacity:.56}
+
+    /* ===== RESERVATION ===== */
+    .reservation{padding-top:85px}
+    .reservation-inner{display:grid;place-items:center;text-align:center}
+    .noren-booking{
+      position:relative;display:block;width:min(510px,92vw);height:auto;
+      text-decoration:none;filter:drop-shadow(0 18px 28px rgba(58,32,14,.18));
+      transition:filter .25s ease
+    }
+    .noren-booking:hover{filter:drop-shadow(0 20px 32px rgba(58,32,14,.21))}
+    .noren-pair{position:relative;width:100%;aspect-ratio:2 / 1;display:grid;grid-template-columns:1fr 1fr;overflow:visible}
+    .noren-half{position:relative;height:100%;overflow:hidden;transform-origin:top center;transition:transform .55s cubic-bezier(.18,.8,.18,1)}
+    .noren-half img{position:absolute;top:0;width:200%;height:100%;max-width:none;object-fit:contain;display:block;pointer-events:none}
+    .noren-left img{left:0}
+    .noren-right img{right:0}
+    .noren-booking:hover .noren-left{transform:translateX(-7%) rotate(-1deg) skewY(-1deg)}
+    .noren-booking:hover .noren-right{transform:translateX(7%) rotate(1deg) skewY(1deg)}
+    .noren-label{
+      position:absolute;left:50%;top:49%;transform:translate(-50%,-50%);
+      white-space:nowrap;font-size:clamp(28px,4vw,44px);color:#27201a;
+      text-shadow:0 2px 0 rgba(255,245,221,.55);pointer-events:none;z-index:4;
+      transition:opacity .25s ease,transform .55s cubic-bezier(.18,.8,.18,1)
+    }
+    .noren-booking:hover .noren-label{opacity:0;transform:translate(-50%,-50%) scale(.96)}
+    .reserve-note{margin:25px 0 0;font-size:12px;opacity:.58}
+
+    /* ===== SNS ===== */
+    .sns-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:34px 28px}
+    .sns-card{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      text-decoration:none;padding:14px 16px 15px;
+      background:rgba(250,239,217,.62);
+      border:1px solid rgba(80,46,23,.18);
+      border-radius:14px;
+      box-shadow:0 8px 18px rgba(60,35,17,.08), inset 0 0 0 1px rgba(255,255,255,.22);
+      transition:transform .2s ease, box-shadow .2s ease, background .2s ease
+    }
+    .sns-card:hover{transform:translateY(-3px) rotate(-.35deg);background:rgba(255,246,229,.82);box-shadow:0 12px 24px rgba(60,35,17,.12)}
+    .sns-text strong{font-size:18px;font-weight:900}
+    .sns-text span{font-size:10px;opacity:.55}
+    .sns-icon{width:40px;height:40px;display:grid;place-items:center;flex:0 0 auto}
+    .sns-icon img{display:block;width:100%;height:100%;object-fit:contain}
+
+    /* ===== ARCHIVE / WALL MENU ===== */
+    .archive-board{max-width:960px;margin:0 auto;position:relative}
+    .archive-board img{display:block;width:100%;height:auto;filter:drop-shadow(0 24px 24px rgba(56,30,11,.18))}
+    .archive-copy{
+      position:absolute;left:19%;right:19%;top:22%;bottom:18%;
+      display:grid;align-content:center;gap:22px;text-align:center;transform:rotate(-1deg)
+    }
+    .archive-title{font-size:clamp(30px,5vw,56px);line-height:1.05;margin:0 0 5px}
+    .board-items{display:grid;gap:10px}
+    .board-item{
+      padding:10px 12px;border-bottom:2px dashed rgba(120,56,35,.32);
+      font-size:clamp(24px,3.8vw,42px);line-height:1.2
+    }
+    .board-item a{text-decoration:none;display:inline-block}
+    .board-item a:hover{text-decoration:underline;text-underline-offset:6px}
+    .board-note{font-size:11px;opacity:.48;margin-top:2px}
+
+    footer{padding:80px 0 130px;text-align:center}
+    footer .hand{font-size:26px}
+    footer small{display:block;margin-top:10px;font-size:11px;opacity:.45}
+
+    /* ===== FLOATING BOOKING ===== */
+    .floating-booking{
+      position:fixed;right:18px;bottom:104px;z-index:145;width:96px;height:96px;border-radius:50%;
+      display:grid;place-items:center;text-align:center;text-decoration:none;background:var(--red);color:#fff7eb;
+      font-weight:900;border:3px solid #fff0d6;box-shadow:0 15px 30px rgba(86,37,16,.24);
+      transform:translateY(18px) scale(.8) rotate(5deg);opacity:0;pointer-events:none;transition:.3s ease;
+    }
+    .floating-booking.show{opacity:1;transform:translateY(0) scale(1) rotate(-3deg);pointer-events:auto}
+    .floating-booking::before{content:"✶";position:absolute;top:7px;left:11px;font-size:15px}
+
+    /* ===== MODAL ===== */
+    .modal{
+      position:fixed;inset:0;z-index:250;display:none;align-items:center;justify-content:center;
+      padding:18px;background:rgba(25,13,7,.58);backdrop-filter:blur(6px)
+    }
+    .modal.open{display:flex}
+    .book-scene{width:min(930px,94vw);max-height:88vh;position:relative;perspective:1800px}
+    .book-spread{
+      width:100%;background:#f8ecd4;border:2px solid rgba(58,31,12,.2);box-shadow:0 28px 70px rgba(0,0,0,.3);
+      min-height:560px;display:grid;grid-template-columns:1fr 1fr;transform:scale(.94);opacity:0;
+      animation:spreadIn .5s cubic-bezier(.18,.8,.18,1) .22s forwards;overflow:auto
+    }
+    @keyframes spreadIn{to{transform:scale(1);opacity:1}}
+    .page{padding:40px 34px;position:relative}
+    .page:first-child{border-right:2px solid rgba(69,39,16,.13)}
+    .page h3{font-size:42px;line-height:1;margin:0 0 28px;text-align:center}
+    .page h3::after{content:"";display:block;width:88px;border-bottom:3px solid var(--ink);margin:10px auto 0;transform:rotate(-2deg)}
+    .page-note{text-align:center;font-size:12px;opacity:.56;margin:-14px 0 22px}
+    .menu-lines{display:grid;gap:8px}
+    .menu-line{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed rgba(61,35,15,.2)}
+    .menu-line b{font-size:17px}.menu-line span{font-size:12px;opacity:.58;text-align:right}
+    .book-close{position:absolute;right:-8px;top:-8px;width:46px;height:46px;border:2px solid var(--ink);border-radius:50%;background:#f8ecd4;cursor:pointer;font-size:20px;z-index:4}
+    .modal-seal{margin:28px auto 0;width:72px;height:72px;border:2px solid var(--red);color:var(--red);border-radius:50%;display:grid;place-items:center;transform:rotate(7deg);font-size:12px;text-align:center}
+
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .hero-poster{animation:none;opacity:1;transform:none;filter:none}
+      .bottom-nav,.floating-booking{transition:none}
+    }
+
+    @media (max-width:780px){
+      section{padding:86px 0}
+      #about{padding-top:95px}
+      .bottom-nav{bottom:8px;border-radius:19px}
+      .nav-item span{font-size:9px}.nav-art{width:35px;height:35px}
+      .time-row{min-height:184px}
+      .time-row:not(.last)::after{top:74%;height:2px}
+      .time-row.left::after{width:37%}.time-row.right::after{width:37%}
+      .time-card{width:35%;bottom:25%;padding:0 2px;background:transparent}
+      .time-row.left .time-card{right:calc(50% + 15px)}
+      .time-row.right .time-card{left:calc(50% + 15px)}
+      .time-icon{width:62px;height:62px;top:74%}.time-icon img{width:52px;height:52px}
+      .time-row.left .time-icon{left:11%}.time-row.right .time-icon{left:89%}
+      .time-card h3{font-size:21px}.time-card .time{font-size:19px}.time-card p{font-size:9px}
+      .timeline-wrap::before{bottom:108px}
+      .time-row.last{min-height:178px}.time-row.last .time-card{width:max-content;max-width:86%;top:22px;bottom:auto;padding:2px 12px 5px}.time-row.last .time-icon{top:74%}
+      .time-row.last::after{display:none}
+      .about-paper p{font-size:16px;line-height:2}
+      .menu-stage{min-height:470px}.menu-book-btn{width:min(450px,92vw)}
+      .menu-book-overlay{left:18%;width:62%;top:31%}
+      .menu-book-overlay .big{font-size:clamp(27px,7vw,44px)}.menu-book-overlay .small{font-size:8px;margin-top:13px}
+      .map-frame,.map-frame iframe{min-height:330px;height:330px}
+      .noren-booking{width:min(460px,94vw)}
+      .noren-label{font-size:clamp(24px,6vw,34px);top:49%}
+      .floating-booking{right:12px;bottom:88px;width:84px;height:84px}
+      .sns-grid{grid-template-columns:repeat(2,1fr);gap:24px 22px}
+      .sns-card{padding:11px 12px 12px}
+      .book-spread{grid-template-columns:1fr;max-height:84vh}
+      .page{padding:26px 20px}.page:first-child{border-right:0;border-bottom:1px solid rgba(69,39,16,.16)}.page h3{font-size:34px}
+      .book-scene{width:min(720px,95vw)}
+      .archive-copy{left:13%;right:13%;top:16%;bottom:15%;gap:12px}
+      .archive-title{font-size:clamp(25px,7vw,38px)}
+      .board-item{font-size:clamp(19px,6.4vw,31px);padding:8px 8px}
+      .board-note{display:none}
+    }
+  </style>
+</head>
+<body>
+  <main id="top">
+    <section class="hero" aria-label="イベント告知画像">
+      <div class="hero-poster">
+        <img src="assets/event-poster.jpg" alt="うましかやろう BAR＆居酒屋 Part 2 イベント告知画像">
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <header class="section-head"><h2 class="hand">イベントについて</h2></header>
+        <div class="about-paper">
+          <p>「BAR＆居酒屋 Part 2」は、劇団 <strong>うましかやろう</strong> がひらく一日限定の居酒屋イベント。</p>
+          <p>昼からふらっと遊びに来ても、夜までゆっくり過ごしてもOK。おでんとカレーの提供は<strong>18:30〜</strong>を予定しています。</p>
+          <p>劇団を知っている人も、はじめましての人も、同じテーブルで乾杯しましょう。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="schedule">
+      <div class="wrap">
+        <header class="section-head"><h2 class="hand">タイムテーブル</h2></header>
+        <div class="timeline-wrap">
+          <div class="time-row left">
+            <div class="time-card"><div class="time">15:00</div><h3 class="hand">OPEN</h3><p>まずは乾杯。ゆっくりスタート。</p></div>
+            <div class="time-icon"><img src="assets/cheers.png" alt="乾杯のイラスト"></div>
+          </div>
+
+          <div class="time-row right">
+            <div class="time-card"><div class="time">TIME 01</div><h3 class="hand">イベント①</h3><p>ここは内容決定後に更新。</p></div>
+            <div class="time-icon"><img src="assets/beer.png" alt="ビールのイラスト"></div>
+          </div>
+
+          <div class="time-row left">
+            <div class="time-card"><div class="time">18:30</div><h3 class="hand">おでん・カレー<br>START</h3><p>あったかい特別メニューをどうぞ。</p></div>
+            <div class="time-icon"><img src="assets/oden.png" alt="おでんのイラスト"></div>
+          </div>
+
+          <div class="time-row right">
+            <div class="time-card"><div class="time">TIME 02</div><h3 class="hand">イベント②</h3><p>ここは内容決定後に更新。</p></div>
+            <div class="time-icon"><img src="assets/edamame.png" alt="枝豆のイラスト"></div>
+          </div>
+
+          <div class="time-row left">
+            <div class="time-card"><div class="time">22:00</div><h3 class="hand">LAST ORDER</h3><p>ご注文は22:00まで。</p></div>
+            <div class="time-icon"><img src="assets/beer.png" alt="ビールのイラスト"></div>
+          </div>
+
+          <div class="time-row last">
+            <div class="time-card"><div class="time">22:30</div><h3 class="hand">CLOSE</h3><p>また次の夜に。</p></div>
+            <div class="time-icon"><img src="assets/curry.png" alt="カレーのイラスト"></div>
+          </div>
+        </div>
+        <div class="brush-note">※タイムテーブルは仮組みです。確定した時刻・企画名へ差し替え可能です。</div>
+      </div>
+    </section>
+
+    <section id="menu">
+      <div class="wrap">
+        <header class="section-head"><h2 class="hand">お品書き</h2></header>
+        <div class="menu-stage">
+          <button class="menu-book-btn" type="button" aria-label="お品書きを開く" id="menuBookBtn">
+            <img src="assets/menu-book.png" alt="手描きの本のイラスト">
+            <div class="menu-book-overlay">
+              <div class="big hand">お品書き</div>
+              <div class="small hand">うましかやろう　BAR＆居酒屋 Part 2</div>
+            </div>
+          </button>
+        </div>
+        <div class="menu-book-hint hand">本を押すと、本がひらきます</div>
+      </div>
+    </section>
+
+    <section id="venue">
+      <div class="wrap">
+        <header class="section-head"><h2 class="hand">金額と会場</h2></header>
+        <div class="venue-stack">
+          <div class="venue-card">
+            <div class="venue-price">2,500<span>円</span></div>
+            <div class="venue-tag">ワンドリンク付き</div>
+            <div class="venue-name hand"><a href="https://www.google.com/maps/search/?api=1&query=%E3%81%86%E3%81%9A%E3%82%81%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E5%8C%97%E5%8C%BA%E6%B5%AE%E7%94%B01%E4%B8%81%E7%9B%AE5-24" target="_blank" rel="noopener">うずめ</a></div>
+            <p class="venue-address">〒530-0026<br>大阪府大阪市北区浮田1丁目5-24</p>
+          </div>
+          <div class="map-frame">
+            <iframe title="会場 うずめ Google Map" loading="lazy" src="https://www.google.com/maps?q=%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E5%8C%97%E5%8C%BA%E6%B5%AE%E7%94%B01%E4%B8%81%E7%9B%AE5-24&output=embed"></iframe>
+          </div>
+          <div class="map-caption">会場までのアクセスはGoogleマップでご確認ください。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reservation" id="reservation">
+      <div class="wrap">
+        <header class="section-head"><h2 class="hand">ご予約</h2></header>
+        <div class="reservation-inner">
+          <a class="noren-booking" href="https://example.com/reservation" target="_blank" rel="noopener" aria-label="予約フォームを開く">
+            <span class="noren-pair" aria-hidden="true">
+              <span class="noren-half noren-left"><img src="assets/noren-booking.png" alt=""></span>
+              <span class="noren-half noren-right"><img src="assets/noren-booking.png" alt=""></span>
+            </span>
+            <span class="noren-label hand">予約はこちら</span>
+          </a>
+          <p class="reserve-note">予約フォームURLが決まったら、このリンク先だけ差し替えればOKです。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sns">
+      <div class="wrap">
+        <header class="section-head"><h2 class="hand">うましかやろう SNS</h2></header>
+        <div class="sns-grid">
+          <a class="sns-card" href="https://umashikayarou.jimdofree.com/" target="_blank" rel="noopener" aria-label="うましかやろう 公式サイト">
+            <div class="sns-text"><strong class="hand">公式サイト</strong><br><span>劇団のホームページ</span></div>
+            <div class="sns-icon"><img src="assets/website.svg" alt="公式サイト"></div>
+          </a>
+          <a class="sns-card" href="https://line.me/" target="_blank" rel="noopener" aria-label="うましかやろう 公式LINE">
+            <div class="sns-text"><strong class="hand">公式LINE</strong><br><span>お知らせ・予約</span></div>
+            <div class="sns-icon"><img src="assets/line-official.svg" alt="LINE"></div>
+          </a>
+          <a class="sns-card" href="https://x.com/umashikayarou01" target="_blank" rel="noopener" aria-label="うましかやろう 公式X">
+            <div class="sns-text"><strong class="hand">公式X</strong><br><span>最新情報・日々のこと</span></div>
+            <div class="sns-icon"><img src="assets/x-official.svg" alt="X"></div>
+          </a>
+          <a class="sns-card" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="うましかやろう 公式Instagram">
+            <div class="sns-text"><strong class="hand">公式Instagram</strong><br><span>写真・お知らせ</span></div>
+            <div class="sns-icon"><img src="assets/instagram-official.svg" alt="Instagram"></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="archive">
+      <div class="wrap">
+        <div class="archive-board">
+          <img src="assets/wall-menu.png" alt="居酒屋の壁掛けメニュー風イラスト">
+          <div class="archive-copy">
+            <h2 class="archive-title hand">過去の公演とイベント</h2>
+            <div class="board-items">
+              <div class="board-item"><a href="#" class="hand">過去の公演　↗</a></div>
+              <div class="board-item"><a href="#" class="hand">過去のイベント　↗</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="hand">うましかやろう</div>
+    <small>© <span id="year"></span> うましかやろう</small>
+  </footer>
+
+  <a id="floatingBooking" class="floating-booking hand" href="#reservation" aria-label="予約はこちら">予約<br>はこちら</a>
+
+  <nav class="bottom-nav" aria-label="ページ内ショートカット">
+    <a class="nav-item" href="#about"><img class="nav-art" src="assets/cheers.png" alt=""><span class="hand">イベント</span></a>
+    <a class="nav-item" href="#schedule"><img class="nav-art" src="assets/beer.png" alt=""><span class="hand">タイムテーブル</span></a>
+    <a class="nav-item" href="#menu"><img class="nav-art" src="assets/menu-book.png" alt=""><span class="hand">お品書き</span></a>
+    <a class="nav-item" href="#venue"><img class="nav-art" src="assets/oden.png" alt=""><span class="hand">会場・料金</span></a>
+    <a class="nav-item" href="#sns"><img class="nav-art" src="assets/edamame.png" alt=""><span class="hand">SNS</span></a>
+  </nav>
+
+  <div id="menuModal" class="modal" aria-hidden="true">
+    <div class="book-scene" role="dialog" aria-modal="true" aria-labelledby="menuModalTitle">
+      <button class="book-close" type="button" aria-label="閉じる">×</button>
+      <div class="book-spread">
+        <article class="page">
+          <h3 class="hand" id="menuModalTitle">お品書き</h3>
+          <div class="page-note">18:30〜 提供予定</div>
+          <div class="menu-lines">
+            <div class="menu-line"><b>大根</b><span>定番の一皿</span></div>
+            <div class="menu-line"><b>たまご</b><span>定番の一皿</span></div>
+            <div class="menu-line"><b>こんにゃく</b><span>定番の一皿</span></div>
+            <div class="menu-line"><b>練りもの各種</b><span>内容は当日のお楽しみ</span></div>
+          </div>
+          <div class="modal-seal">うま<br>しか</div>
+        </article>
+        <article class="page">
+          <h3 class="hand">カレー・ドリンク</h3>
+          <div class="page-note">内容は決まり次第更新します。</div>
+          <div class="menu-lines">
+            <div class="menu-line"><b>本日のカレー</b><span>内容は決まり次第更新</span></div>
+            <div class="menu-line"><b>トッピング</b><span>内容は決まり次第更新</span></div>
+            <div class="menu-line"><b>ビール</b><span>種類は決まり次第更新</span></div>
+            <div class="menu-line"><b>ハイボール・サワー</b><span>種類は決まり次第更新</span></div>
+            <div class="menu-line"><b>ソフトドリンク</b><span>種類は決まり次第更新</span></div>
+          </div>
+          <div class="modal-seal">Part<br>2</div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const root = document.body;
+    const booking = document.getElementById('floatingBooking');
+    function onScroll(){
+      const y = window.scrollY;
+      root.classList.toggle('is-scrolled', y > 90);
+      booking.classList.toggle('show', y > 180);
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+
+    const modal = document.getElementById('menuModal');
+    const bookBtn = document.getElementById('menuBookBtn');
+    const closeBtn = modal.querySelector('.book-close');
+    function openMenu(){modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+    function closeMenu(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+    bookBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    modal.addEventListener('click', e=>{ if(e.target===modal) closeMenu(); });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
