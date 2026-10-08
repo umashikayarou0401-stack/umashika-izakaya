@@ -1381,6 +1381,62 @@
       #schedule .tl-deco{width:54px;height:54px;}
     }
 
+
+
+    /* ===== V32: mobile timeline final spacing =====
+       Move each event group slightly upward as a unit so the copy sits closer to the branch,
+       while keeping the matching illustration on that same branch endpoint. */
+    @media (max-width:780px){
+      #schedule .tl-copy{top:4px;}
+
+      /* move the branch + matching illustration upward together (no change to their gap) */
+      #schedule .tl-item:nth-child(1)::after{top:49px;}
+      #schedule .tl-item:nth-child(1) .tl-icon{top:49px;}
+      #schedule .tl-item:nth-child(2)::after{top:104px;}
+      #schedule .tl-item:nth-child(2) .tl-icon{top:104px;}
+      #schedule .tl-item:nth-child(3)::after{top:104px;}
+      #schedule .tl-item:nth-child(3) .tl-icon{top:104px;}
+      #schedule .tl-item:nth-child(4)::after{top:74px;}
+      #schedule .tl-item:nth-child(4) .tl-icon{top:74px;}
+      #schedule .tl-item:nth-child(5)::after{top:74px;}
+      #schedule .tl-item:nth-child(5) .tl-icon{top:74px;}
+      #schedule .tl-item:nth-child(6)::after{top:51px;}
+      #schedule .tl-item:nth-child(6) .tl-icon{top:51px;}
+      #schedule .tl-item:nth-child(7)::after{top:51px;}
+      #schedule .tl-item:nth-child(7) .tl-icon{top:51px;}
+
+      /* keep decorative illustrations in the lower open space, away from the event endpoint */
+      #schedule .tl-deco{bottom:0;z-index:1;}
+
+      /* LAST ORDER: line can approach the text, but the lettering always sits above it. */
+      #schedule .tl-close-line{height:22px;z-index:1;}
+      #schedule .tl-close .tl-copy{
+        top:22px;
+        z-index:12;
+        background:var(--paper);
+        padding:0 10px 5px;
+      }
+    }
+    @media (max-width:390px){
+      #schedule .tl-copy{top:3px;}
+      #schedule .tl-item:nth-child(1)::after{top:48px;}
+      #schedule .tl-item:nth-child(1) .tl-icon{top:48px;}
+      #schedule .tl-item:nth-child(2)::after{top:102px;}
+      #schedule .tl-item:nth-child(2) .tl-icon{top:102px;}
+      #schedule .tl-item:nth-child(3)::after{top:102px;}
+      #schedule .tl-item:nth-child(3) .tl-icon{top:102px;}
+      #schedule .tl-item:nth-child(4)::after{top:72px;}
+      #schedule .tl-item:nth-child(4) .tl-icon{top:72px;}
+      #schedule .tl-item:nth-child(5)::after{top:72px;}
+      #schedule .tl-item:nth-child(5) .tl-icon{top:72px;}
+      #schedule .tl-item:nth-child(6)::after{top:49px;}
+      #schedule .tl-item:nth-child(6) .tl-icon{top:49px;}
+      #schedule .tl-item:nth-child(7)::after{top:49px;}
+      #schedule .tl-item:nth-child(7) .tl-icon{top:49px;}
+      #schedule .tl-close-line{height:20px;}
+      #schedule .tl-close .tl-copy{top:20px;}
+    }
+
 </style>
 </head>
 <body>
