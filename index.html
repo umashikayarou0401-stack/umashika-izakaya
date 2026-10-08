@@ -1088,6 +1088,299 @@
       #schedule .tl-close .tl-time{font-size:20px;}
       #schedule .tl-close .tl-copy h3{font-size:22px;}
     }
+
+    /* ===== SCHEDULE CONNECTION FIX =====
+       The horizontal branch now meets the event block vertically, while the illustration
+       sits on the far endpoint of that same branch. This is intentionally tuned for phones. */
+    #schedule .tl-mobile{width:min(980px,100%);margin:0 auto;}
+    #schedule .tl-item{position:relative;min-height:236px;}
+    #schedule .tl-item::after{
+      content:"";position:absolute;top:132px;height:3px;width:30%;
+      background:var(--line);border-radius:999px;z-index:1;
+    }
+    #schedule .tl-left::after{right:50%;left:auto;}
+    #schedule .tl-right::after{left:50%;right:auto;}
+    #schedule .tl-copy{position:absolute;top:18px;width:41%;z-index:6;text-align:center;}
+    #schedule .tl-left .tl-copy{left:4%;}
+    #schedule .tl-right .tl-copy{right:4%;}
+    #schedule .tl-time{font-weight:900;font-size:25px;line-height:1.08;margin-bottom:7px;white-space:nowrap;}
+    #schedule .tl-copy h3{font-size:29px;line-height:1.16;margin:0;overflow-wrap:anywhere;}
+    #schedule .tl-icon{position:absolute;top:132px;left:9.5%;width:62px;height:62px;transform:translate(-50%,-50%);z-index:7;}
+    #schedule .tl-right .tl-icon{left:auto;right:9.5%;transform:translate(50%,-50%);}
+
+    @media(max-width:780px){
+      #schedule .tl-mobile{width:100%;max-width:none;margin:0 auto;}
+      #schedule .tl-item{min-height:232px;}
+      #schedule .tl-item::after{top:132px;height:3px;width:38%;}
+      #schedule .tl-left::after{right:50%;left:auto;}
+      #schedule .tl-right::after{left:50%;right:auto;}
+      #schedule .tl-copy{
+        top:14px;width:45%;padding:0 2px;text-align:center;
+      }
+      #schedule .tl-left .tl-copy{left:2%;right:auto;}
+      #schedule .tl-right .tl-copy{left:auto;right:2%;}
+      #schedule .tl-time{font-size:19px;line-height:1.05;margin-bottom:6px;}
+      #schedule .tl-copy h3{font-size:20px;line-height:1.22;margin:0;overflow-wrap:anywhere;}
+      #schedule .tl-icon{top:132px;left:12%;width:62px;height:62px;transform:translate(-50%,-50%);}
+      #schedule .tl-right .tl-icon{left:auto;right:12%;transform:translate(50%,-50%);}
+      #schedule .tl-icon img{width:50px;height:50px;}
+      #schedule .tl-emoji{font-size:34px;}
+      #schedule .tl-question{font-size:42px;}
+
+      /* Keep decorative art in open space, never on top of event text or the branch. */
+      #schedule .tl-deco{bottom:14px;top:auto;width:64px;height:64px;z-index:2;opacity:.72;}
+      #schedule .tl-deco-right{right:3%;left:auto;}
+      #schedule .tl-deco-left{left:3%;right:auto;}
+      #schedule .tl-cocktail{font-size:38px;}
+
+      /* CLOSE stays centered; its vertical line ends above the time label. */
+      #schedule .tl-close{min-height:188px;}
+      #schedule .tl-close-line{height:34px;top:0;}
+      #schedule .tl-close .tl-copy{top:44px;left:50%;right:auto;width:88%;transform:translateX(-50%);}
+      #schedule .tl-close .tl-time{font-size:22px;}
+      #schedule .tl-close .tl-copy h3{font-size:24px;white-space:nowrap;}
+      #schedule .tl-close .tl-icon{top:126px;left:50%;right:auto;width:60px;height:60px;transform:translate(-50%,-50%);}
+    }
+
+    @media(max-width:390px){
+      #schedule .tl-item{min-height:236px;}
+      #schedule .tl-copy{width:46%;top:14px;}
+      #schedule .tl-left .tl-copy{left:1%;}
+      #schedule .tl-right .tl-copy{right:1%;}
+      #schedule .tl-time{font-size:18px;}
+      #schedule .tl-copy h3{font-size:18px;line-height:1.22;}
+      #schedule .tl-item::after{top:132px;width:39%;}
+      #schedule .tl-icon{top:132px;width:58px;height:58px;}
+      #schedule .tl-right .tl-icon{top:132px;}
+      #schedule .tl-icon img{width:46px;height:46px;}
+      #schedule .tl-emoji{font-size:31px;}
+      #schedule .tl-question{font-size:39px;}
+      #schedule .tl-deco{width:56px;height:56px;}
+      #schedule .tl-close{min-height:182px;}
+      #schedule .tl-close .tl-copy h3{font-size:22px;}
+      #schedule .tl-close .tl-icon{top:124px;}
+    }
+
+
+    /* ===== V31 MOBILE TIMELINE: tight, readable, no overlaps ===== */
+    @media (max-width:780px){
+      #schedule .tl-mobile{
+        width:100%;
+        max-width:390px;
+        margin:0 auto;
+        padding:0 0 6px;
+        overflow:visible;
+      }
+      #schedule .tl-mobile::before{
+        left:50%;
+        top:0;
+        bottom:0;
+        width:3px;
+        transform:translateX(-50%);
+        background:var(--line);
+        z-index:0;
+      }
+      #schedule .tl-item{
+        position:relative;
+        min-height:214px;
+        margin:0;
+        padding:0;
+      }
+      /* The branch is placed immediately after the text block, not far below it. */
+      #schedule .tl-item::after{
+        content:"";
+        position:absolute;
+        top:104px;
+        height:3px;
+        width:40%;
+        background:var(--line);
+        border-radius:999px;
+        z-index:1;
+      }
+      #schedule .tl-left::after{right:50%;left:auto;}
+      #schedule .tl-right::after{left:50%;right:auto;}
+
+      #schedule .tl-copy{
+        position:absolute;
+        top:14px;
+        width:44%;
+        padding:0;
+        margin:0;
+        z-index:5;
+        text-align:center;
+      }
+      #schedule .tl-left .tl-copy{left:3%;right:auto;}
+      #schedule .tl-right .tl-copy{left:auto;right:3%;}
+      #schedule .tl-time{
+        display:block;
+        margin:0 0 4px;
+        font-size:20px;
+        line-height:1.05;
+        font-weight:900;
+        white-space:nowrap;
+        letter-spacing:.01em;
+      }
+      #schedule .tl-copy h3{
+        margin:0;
+        font-size:19px;
+        line-height:1.2;
+        font-weight:900;
+        letter-spacing:.005em;
+        overflow-wrap:anywhere;
+        word-break:normal;
+      }
+
+      #schedule .tl-icon{
+        position:absolute;
+        top:104px;
+        width:62px;
+        height:62px;
+        z-index:7;
+      }
+      #schedule .tl-left .tl-icon{left:8%;transform:translate(-50%,-50%);}
+      #schedule .tl-right .tl-icon{left:auto;right:8%;transform:translate(50%,-50%);}
+      #schedule .tl-icon img{width:50px;height:50px;object-fit:contain;}
+      #schedule .tl-emoji{font-size:34px;line-height:1;}
+      #schedule .tl-question{font-size:42px;line-height:1;}
+
+      /* Decoration stays at the far edge and below the branch, never on copy. */
+      #schedule .tl-deco{
+        top:auto;
+        bottom:10px;
+        width:62px;
+        height:62px;
+        z-index:2;
+        opacity:.78;
+      }
+      #schedule .tl-deco-left{left:2%;right:auto;}
+      #schedule .tl-deco-right{right:2%;left:auto;}
+      #schedule .tl-cocktail{font-size:40px;}
+
+      /* Close row: short line above, never through time/text/icon. */
+      #schedule .tl-close{
+        min-height:170px;
+      }
+      #schedule .tl-close-line{
+        position:absolute;
+        left:50%;
+        top:0;
+        width:3px;
+        height:30px;
+        transform:translateX(-50%);
+        background:var(--line);
+        z-index:1;
+      }
+      #schedule .tl-close .tl-copy{
+        top:34px;
+        left:50%;
+        right:auto;
+        width:86%;
+        transform:translateX(-50%);
+      }
+      #schedule .tl-close .tl-time{font-size:21px;}
+      #schedule .tl-close .tl-copy h3{font-size:23px;white-space:nowrap;}
+      #schedule .tl-close .tl-icon{
+        top:110px;
+        left:50%;
+        right:auto;
+        width:62px;
+        height:62px;
+        transform:translate(-50%,-50%);
+      }
+    }
+    @media (max-width:390px){
+      #schedule .tl-mobile{max-width:100%;}
+      #schedule .tl-item{min-height:218px;}
+      #schedule .tl-item::after{top:106px;width:40%;}
+      #schedule .tl-copy{width:45%;top:14px;}
+      #schedule .tl-left .tl-copy{left:2%;}
+      #schedule .tl-right .tl-copy{right:2%;}
+      #schedule .tl-time{font-size:19px;}
+      #schedule .tl-copy h3{font-size:18px;line-height:1.18;}
+      #schedule .tl-icon{top:106px;width:60px;height:60px;}
+      #schedule .tl-left .tl-icon{left:8%;}
+      #schedule .tl-right .tl-icon{right:8%;}
+      #schedule .tl-icon img{width:48px;height:48px;}
+      #schedule .tl-emoji{font-size:33px;}
+      #schedule .tl-question{font-size:40px;}
+      #schedule .tl-deco{width:58px;height:58px;bottom:10px;}
+      #schedule .tl-close{min-height:168px;}
+      #schedule .tl-close-line{height:28px;}
+      #schedule .tl-close .tl-copy{top:33px;}
+      #schedule .tl-close .tl-time{font-size:20px;}
+      #schedule .tl-close .tl-copy h3{font-size:22px;}
+      #schedule .tl-close .tl-icon{top:108px;width:60px;height:60px;}
+    }
+
+
+    /* ===== V31 MOBILE FINAL: branch/illustration follows the event text with a small, deliberate gap ===== */
+    @media (max-width:780px){
+      #schedule .tl-mobile{width:100%;max-width:390px;margin:0 auto;padding:0 0 12px;overflow:visible;}
+      #schedule .tl-mobile::before{left:50%;top:0;bottom:0;width:3px;transform:translateX(-50%);background:var(--line);z-index:0;}
+      #schedule .tl-item{position:relative;min-height:190px;margin:0;padding:0;}
+
+      #schedule .tl-item::after{content:"";position:absolute;height:3px;width:42%;background:var(--line);border-radius:999px;z-index:1;}
+      #schedule .tl-left::after{right:50%;left:auto;}
+      #schedule .tl-right::after{left:50%;right:auto;}
+
+      #schedule .tl-copy{position:absolute;top:14px;width:46%;padding:0 2px;margin:0;z-index:5;text-align:center;}
+      #schedule .tl-left .tl-copy{left:2%;right:auto;}
+      #schedule .tl-right .tl-copy{right:2%;left:auto;}
+      #schedule .tl-time{display:block;margin:0 0 4px;font-size:18.5px;line-height:1.05;font-weight:900;white-space:nowrap;letter-spacing:.01em;}
+      #schedule .tl-copy h3{margin:0;font-size:18px;line-height:1.18;font-weight:900;letter-spacing:0;overflow-wrap:anywhere;word-break:normal;}
+
+      /* Branch + icon positions are intentionally just below the text block. */
+      #schedule .tl-item:nth-child(1)::after{top:58px;}
+      #schedule .tl-item:nth-child(1) .tl-icon{top:58px;}
+      #schedule .tl-item:nth-child(2)::after{top:114px;}
+      #schedule .tl-item:nth-child(2) .tl-icon{top:114px;}
+      #schedule .tl-item:nth-child(3)::after{top:114px;}
+      #schedule .tl-item:nth-child(3) .tl-icon{top:114px;}
+      #schedule .tl-item:nth-child(4)::after{top:84px;}
+      #schedule .tl-item:nth-child(4) .tl-icon{top:84px;}
+      #schedule .tl-item:nth-child(5)::after{top:84px;}
+      #schedule .tl-item:nth-child(5) .tl-icon{top:84px;}
+      #schedule .tl-item:nth-child(6)::after{top:60px;}
+      #schedule .tl-item:nth-child(6) .tl-icon{top:60px;}
+      #schedule .tl-item:nth-child(7)::after{top:60px;}
+      #schedule .tl-item:nth-child(7) .tl-icon{top:60px;}
+
+      #schedule .tl-icon{position:absolute;width:60px;height:60px;z-index:7;}
+      #schedule .tl-left .tl-icon{left:8%;transform:translate(-50%,-50%);}
+      #schedule .tl-right .tl-icon{left:auto;right:8%;transform:translate(50%,-50%);}
+      #schedule .tl-icon img{width:48px;height:48px;object-fit:contain;}
+      #schedule .tl-emoji{font-size:33px;line-height:1;}
+      #schedule .tl-question{font-size:40px;line-height:1;}
+
+      #schedule .tl-deco{top:auto;bottom:8px;width:56px;height:56px;z-index:2;opacity:.78;}
+      #schedule .tl-deco-left{left:2%;right:auto;}
+      #schedule .tl-deco-right{right:2%;left:auto;}
+      #schedule .tl-cocktail{font-size:38px;}
+
+      #schedule .tl-close{min-height:176px;}
+      #schedule .tl-close-line{position:absolute;left:50%;top:0;width:3px;height:28px;transform:translateX(-50%);background:var(--line);z-index:1;}
+      #schedule .tl-close .tl-copy{top:32px;left:50%;right:auto;width:88%;transform:translateX(-50%);}
+      #schedule .tl-close .tl-time{font-size:21px;}
+      #schedule .tl-close .tl-copy h3{font-size:23px;white-space:nowrap;}
+      #schedule .tl-close .tl-icon{top:108px;left:50%;right:auto;width:60px;height:60px;transform:translate(-50%,-50%);}
+    }
+    @media (max-width:390px){
+      #schedule .tl-mobile{max-width:100%;}
+      #schedule .tl-item{min-height:190px;}
+      #schedule .tl-time{font-size:18px;}
+      #schedule .tl-copy h3{font-size:17.5px;line-height:1.18;}
+      #schedule .tl-item:nth-child(1)::after{top:57px;} #schedule .tl-item:nth-child(1) .tl-icon{top:57px;}
+      #schedule .tl-item:nth-child(2)::after{top:112px;} #schedule .tl-item:nth-child(2) .tl-icon{top:112px;}
+      #schedule .tl-item:nth-child(3)::after{top:112px;} #schedule .tl-item:nth-child(3) .tl-icon{top:112px;}
+      #schedule .tl-item:nth-child(4)::after{top:82px;} #schedule .tl-item:nth-child(4) .tl-icon{top:82px;}
+      #schedule .tl-item:nth-child(5)::after{top:82px;} #schedule .tl-item:nth-child(5) .tl-icon{top:82px;}
+      #schedule .tl-item:nth-child(6)::after{top:59px;} #schedule .tl-item:nth-child(6) .tl-icon{top:59px;}
+      #schedule .tl-item:nth-child(7)::after{top:59px;} #schedule .tl-item:nth-child(7) .tl-icon{top:59px;}
+      #schedule .tl-icon{width:58px;height:58px;} #schedule .tl-icon img{width:46px;height:46px;}
+      #schedule .tl-emoji{font-size:31px;} #schedule .tl-question{font-size:39px;}
+      #schedule .tl-deco{width:54px;height:54px;}
+    }
+
 </style>
 </head>
 <body>
