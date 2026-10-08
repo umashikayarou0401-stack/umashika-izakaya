@@ -35,9 +35,11 @@
     }
 
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;scrollbar-gutter:stable}
     body{
       margin:0;
+      width:100%;
+      max-width:100%;
       color:var(--ink);
       background:
         radial-gradient(circle at 18% 18%, rgba(255,255,255,.32), transparent 30%),
@@ -61,7 +63,7 @@
     button{font:inherit}
     img{max-width:100%}
     .hand{font-family:var(--hand);font-weight:900;letter-spacing:.025em;-webkit-text-stroke:.32px currentColor;text-shadow:0 .3px 0 currentColor}
-    .wrap{width:min(1060px,92vw);margin-inline:auto}
+    .wrap{width:min(1060px,calc(100% - 32px));margin-inline:auto}
 
     /* ===== FIRST VIEW ===== */
     .hero{
@@ -173,23 +175,44 @@
       transform:translateX(-50%);background:var(--line);z-index:0}
     .time-row{min-height:210px;position:relative}
     .time-row:not(.last)::after{
-      content:"";position:absolute;top:74%;height:3px;background:var(--line);
+      content:"";position:absolute;top:50%;height:3px;background:var(--line);
       transform:translateY(-50%);z-index:1;border-radius:999px}
     .time-row.left::after{right:50%;width:34%}
     .time-row.right::after{left:50%;width:34%}
     .time-card{
-      position:absolute;bottom:26%;width:33%;padding:0 6px;z-index:3;
+      position:absolute;top:50%;transform:translateY(-50%);width:33%;padding:0 6px;z-index:3;
       background:transparent;border-radius:0;text-align:center}
     .time-row.left .time-card{right:calc(50% + 24px)}
     .time-row.right .time-card{left:calc(50% + 24px)}
     .time-icon{
-      position:absolute;top:74%;width:84px;height:84px;border-radius:50%;
+      position:absolute;top:50%;width:84px;height:84px;border-radius:50%;
       transform:translate(-50%,-50%);display:grid;place-items:center;
       background:rgba(250,239,217,.98);border:2px solid rgba(46,25,11,.18);
       box-shadow:0 8px 22px rgba(55,31,13,.13);z-index:3}
     .time-row.left .time-icon{left:16%}
     .time-row.right .time-icon{left:84%}
-    .time-icon img{width:74px;height:74px;object-fit:contain}
+    .time-icon img{width:86%;height:86%;object-fit:contain}
+
+    /* ===== TIMELINE DECORATIONS ===== */
+    .time-deco{
+      position:absolute;
+      width:104px; height:104px;
+      display:grid; place-items:center;
+      pointer-events:none;
+      z-index:1;
+      opacity:.82;
+      transform:rotate(-6deg);
+      filter:drop-shadow(0 10px 14px rgba(64,38,18,.13));
+    }
+    .time-deco img{width:100%;height:100%;object-fit:contain}
+    .time-deco.right{right:7%;top:28%}
+    .time-deco.left{left:7%;top:28%;transform:rotate(6deg)}
+    .time-deco.lower{top:58%}
+    .time-deco.tilt-more{transform:rotate(10deg)}
+    .time-deco.left.tilt-more{transform:rotate(-10deg)}
+    .time-deco.small{width:84px;height:84px}
+    .time-emoji{font-family:Arial,"Noto Sans",sans-serif;font-size:48px;line-height:1;display:grid;place-items:center;filter:drop-shadow(0 3px 2px rgba(50,30,14,.12))}
+    .time-emoji.question{font-family:var(--hand);font-size:58px;font-weight:900;color:#d28a18;text-shadow:2px 2px 0 #f7ecd8,0 3px 0 rgba(94,61,28,.18)}
     .time-card .time{display:block;font-size:27px;font-weight:900;line-height:1;margin-bottom:7px;-webkit-text-stroke:.4px currentColor;text-shadow:0 .4px 0 currentColor}
     .time-card h3{font-size:31px;margin:0;line-height:1.08;-webkit-text-stroke:.4px currentColor;text-shadow:0 .4px 0 currentColor}
     .time-card p{font-size:13px;line-height:1.45;opacity:.68;margin:0}
@@ -205,6 +228,42 @@
     .time-row.last .time-icon{left:50%;top:74%;z-index:3}
     .time-row.last::after{display:none}
     .brush-note{margin:20px auto 0;max-width:720px;text-align:center;font-size:12px;opacity:.55}
+    /* ===== TIMELINE SPEECH BUBBLES ===== */
+    .row-bubble{
+      position:absolute;
+      width:210px;
+      height:116px;
+      display:grid;
+      place-items:center;
+      z-index:2;
+      pointer-events:none;
+    }
+    .row-bubble img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      filter:drop-shadow(0 7px 10px rgba(55,31,13,.10));
+    }
+    .row-bubble span{
+      position:relative;
+      z-index:1;
+      width:72%;
+      margin-top:-2px;
+      text-align:center;
+      font-size:15px;
+      line-height:1.35;
+      color:var(--ink);
+      -webkit-text-stroke:.22px currentColor;
+      text-shadow:0 .25px 0 currentColor;
+    }
+    .row-bubble.right-side{right:4%;top:16%;}
+    .row-bubble.left-side{left:4%;top:16%;}
+    .row-bubble.bubble-oval{transform:rotate(-2deg)}
+    .row-bubble.bubble-cloud{transform:rotate(2deg)}
+    .row-bubble.bubble-oval2{transform:rotate(3deg)}
+    .row-bubble.bubble-burst{transform:rotate(-4deg)}
 
     /* ===== MENU ===== */
     .menu-stage{display:grid;place-items:center;min-height:590px}
@@ -475,50 +534,210 @@
       .sns-text span{font-size:8px}
     }
 
+    /* ===== FINAL MOBILE LAYOUT ===== */
+    @media (max-width: 780px){
+      html, body{width:100%;max-width:100%;overflow-x:clip}
+      .wrap{width:calc(100% - 24px);max-width:680px}
+      section{padding:70px 0}
+      #about{padding-top:78px}
+      .section-head{margin-bottom:28px}
+      .section-head h2{font-size:clamp(34px,9vw,50px);white-space:nowrap;max-width:100%;line-height:1.05}
+      .section-head h2::after{width:86px;height:6px;margin-top:8px;border-bottom-width:3px}
+      .section-head p{font-size:11px;line-height:1.8;margin-top:14px}
+
+      .about-paper{width:100%;padding:0 1px;text-align:left}
+      .about-paper p,.about-paper p:first-child{font-size:15px;line-height:2.0;margin:0 0 22px;letter-spacing:.01em}
+
+      /* Timeline: text and matching illustration share the same horizontal branch. */
+      .timeline-wrap{width:100%;padding:0 0 4px}
+      .timeline-wrap::before{left:50%;top:0;bottom:0;width:3px}
+      .time-row{min-height:172px;position:relative}
+      .time-row:not(.last)::after{top:50%;height:2px;transform:translateY(-50%);z-index:1}
+      .time-row.left::after{right:50%;width:42%}
+      .time-row.right::after{left:50%;width:42%}
+      .time-card{top:50%;bottom:auto;transform:translateY(-50%);width:34%;padding:0;z-index:4;background:transparent}
+      .time-row.left .time-card{left:13%;right:auto;text-align:right}
+      .time-row.right .time-card{left:54%;right:auto;text-align:left}
+      .time-card .time{font-size:16px;line-height:1.05;margin-bottom:4px;white-space:nowrap}
+      .time-card h3{font-size:16px;line-height:1.18;margin:0;overflow-wrap:anywhere}
+      .time-card p{font-size:9px;line-height:1.35}
+      .time-icon{top:50%;width:60px;height:60px;border-radius:50%;z-index:5}
+      .time-icon img{width:49px;height:49px}
+      .time-emoji{font-size:34px}
+      .time-emoji.question{font-size:42px}
+      .time-row.left .time-icon{left:7%;transform:translate(-50%,-50%)}
+      .time-row.right .time-icon{left:93%;transform:translate(-50%,-50%)}
+      .time-row.last{min-height:172px}
+      .time-row.last .time-card{left:50%;top:34px;bottom:auto;width:max-content;max-width:90%;transform:translateX(-50%);padding:0 10px 4px;background:var(--paper);border-radius:8px;z-index:6}
+      .time-row.last .time-card .time{font-size:19px}
+      .time-row.last .time-card h3{font-size:21px;white-space:nowrap}
+      .time-row.last .time-icon{left:50%;top:73%;width:60px;height:60px;z-index:5}
+      /* Hide the vertical line once it reaches just above the CLOSE time. */
+      .time-row.last::before{content:"";position:absolute;left:calc(50% - 3px);top:42px;bottom:0;width:6px;background:var(--paper);z-index:5}
+      .time-row.last .time-cover{display:none}
+      .time-deco{width:64px;height:64px;opacity:.72;z-index:1}
+      .time-deco.right{right:3%;top:18%}
+      .time-deco.left{left:3%;top:18%}
+      .time-deco.lower{top:60%}
+      .time-deco.small{width:56px;height:56px}
+
+
+      .menu-stage{min-height:400px}
+      .menu-book-btn{width:min(430px,92vw)}
+      .menu-book-overlay{left:18%;width:62%;top:31%}
+      .menu-book-overlay .big{font-size:clamp(28px,7vw,44px)}
+      .menu-book-overlay .small{font-size:7px;margin-top:10px}
+      .menu-book-hint{font-size:11px;margin-top:-14px}
+
+      .venue-stack{gap:20px}
+      .venue-card{padding:15px 6px 18px}
+      .venue-price{font-size:clamp(48px,15vw,72px)}
+      .venue-price span{font-size:18px}
+      .venue-name{font-size:30px;margin:17px 0 6px}
+      .venue-address{font-size:12px;line-height:1.7}
+      .map-frame,.map-frame iframe{min-height:320px;height:320px}
+
+      .noren-booking{width:min(460px,94vw)}
+      .noren-label{font-size:clamp(23px,6vw,34px)}
+
+      /* SNS: no forced awkward breaks on narrow phones. */
+      .sns-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px}
+      .sns-card{min-width:0;min-height:96px;padding:10px 8px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:6px}
+      .sns-icon{order:-1;width:34px;height:34px}
+      .sns-text{min-width:0;max-width:100%}
+      .sns-text strong{display:block;font-size:14px;line-height:1.05;white-space:nowrap;letter-spacing:0}
+      .sns-text span{display:block;font-size:8px;line-height:1.25;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.52}
+
+      .archive-copy{left:9%;right:9%;top:18%;bottom:11%;gap:0}
+      .board-item{padding:12px 4px;font-size:clamp(20px,6vw,30px)}
+      .archive-modal{padding:22px 12px 18px}
+      .archive-grid{grid-template-columns:1fr;gap:16px}
+
+      .bottom-nav{left:50%;width:calc(100% - 12px);max-width:680px;bottom:7px;padding:6px 4px;gap:2px;border-radius:19px}
+      .nav-item{padding:3px 1px 2px}
+      .nav-art{width:34px;height:34px}
+      .nav-item span{font-size:8.5px;line-height:1;white-space:nowrap}
+      .floating-booking{right:9px;bottom:84px;width:78px;height:78px;font-size:13px}
+
+      .book-spread{grid-template-columns:1fr;max-height:84vh}
+      .page{padding:26px 18px}
+      .page:first-child{border-right:0;border-bottom:1px solid rgba(69,39,16,.16)}
+      .page h3{font-size:34px}
+      .archive-modal-scene{width:min(96vw,640px)}
+      .menu-announcement-scene{width:min(94vw,640px)}
+    }
+
+    @media (max-width:390px){
+      .wrap{width:calc(100% - 20px)}
+      .about-paper p,.about-paper p:first-child{font-size:14px;line-height:1.95}
+      .time-row{min-height:180px}
+      .time-card{width:35%}
+      .time-row.left .time-card{left:13%}
+      .time-row.right .time-card{left:54%}
+      .time-card .time{font-size:15px}
+      .time-card h3{font-size:14px;line-height:1.2}
+      .time-icon{width:54px;height:54px}
+      .time-icon img{width:44px;height:44px}
+      .time-emoji{font-size:30px}
+      .time-emoji.question{font-size:38px}
+      .time-row.left .time-icon{left:6.5%}
+      .time-row.right .time-icon{left:93.5%}
+      .time-row.last{min-height:176px}
+      .time-row.last .time-card h3{font-size:19px}
+      .time-deco{width:54px;height:54px}.time-deco.small{width:48px;height:48px}
+
+
+      .sns-card{min-height:94px}
+      .sns-icon{width:32px;height:32px}
+      .sns-text strong{font-size:13px}
+      .sns-text span{font-size:7.6px}
+    }
+
+    @media (max-width: 780px){
+      .timeline-wrap .time-card{width:42%;z-index:6}
+      .timeline-wrap .time-row.left .time-card{left:10%;right:auto;text-align:left}
+      .timeline-wrap .time-row.right .time-card{left:48%;right:auto;text-align:left}
+      .timeline-wrap .time-row.left .time-icon{left:7%;z-index:5}
+      .timeline-wrap .time-row.right .time-icon{left:93%;z-index:5}
+      .timeline-wrap .time-card h3{font-size:15px;line-height:1.22}
+      .timeline-wrap .time-card .time{font-size:15px}
+    }
+
+    /* Final smartphone timeline pass: use the full screen width, keep the spine clean, and reserve the outer corners for decorative art/bubbles. */
+    @media (max-width:780px){
+      .timeline-wrap{width:100%;max-width:100%;padding-inline:0;}
+      .timeline-wrap::before{left:50%;width:3px;top:0;bottom:150px;}
+      .time-row{min-height:176px;position:relative;}
+      .time-row:not(.last)::after{top:50%;height:2px;background:var(--line);z-index:1;}
+      .time-row.left::after{right:50%;left:auto;width:47%;}
+      .time-row.right::after{left:50%;right:auto;width:47%;}
+
+      /* Each event gets one clean text block and one matching icon at the outer end of its branch. */
+      .time-card{width:39%;top:50%;z-index:6;padding:0;transform:translateY(-50%);background:transparent;}
+      .time-row.left .time-card{left:12%;right:auto;text-align:left;}
+      .time-row.right .time-card{left:51%;right:auto;text-align:left;}
+      .time-card .time{font-size:16px;line-height:1.05;margin-bottom:4px;white-space:nowrap;}
+      .time-card h3{font-size:15px;line-height:1.23;margin:0;overflow-wrap:anywhere;}
+      .time-card p{font-size:9px;line-height:1.35;}
+
+      .time-icon{width:58px;height:58px;top:50%;z-index:7;}
+      .time-row.left .time-icon{left:4%;}
+      .time-row.right .time-icon{left:96%;}
+      .time-icon img{width:48px;height:48px;}
+      .time-emoji{font-size:31px;}
+      .time-emoji.question{font-size:40px;}
+
+      /* Decorations live in the unused outer corner of a row instead of floating near the copy. */
+      .time-deco{width:68px;height:68px;z-index:2;opacity:.82;}
+      .time-deco.right{right:7%;left:auto;top:12%;}
+      .time-deco.left{left:7%;right:auto;top:62%;}
+      .time-deco.lower{top:62%;}
+      .time-deco.small{width:68px;height:68px;}
+      .time-row.has-bubble .time-deco{display:none;}
+
+      /* Speech bubbles sit in the opposite open half of the row and never cover the event copy. */
+      .row-bubble{width:146px;height:84px;z-index:2;}
+      .row-bubble span{width:70%;font-size:10.5px;line-height:1.25;letter-spacing:0;-webkit-text-stroke:.16px currentColor;}
+      .row-bubble.right-side{right:2%;left:auto;top:5%;}
+      .row-bubble.left-side{left:2%;right:auto;top:5%;}
+
+      .time-row.last{min-height:176px;}
+      .time-row.last .time-card{left:50%;top:30px;width:max-content;max-width:88%;padding:0 10px 5px;transform:translateX(-50%);z-index:8;}
+      .time-row.last .time-card .time{font-size:19px;}
+      .time-row.last .time-card h3{font-size:20px;white-space:nowrap;}
+      .time-row.last .time-icon{left:50%;top:74%;width:58px;height:58px;}
+      .time-row.last::after{display:none;}
+    }
+
+    @media (max-width:390px){
+      .time-row{min-height:182px;}
+      .time-card{width:40%;}
+      .time-row.left .time-card{left:11%;}
+      .time-row.right .time-card{left:52%;}
+      .time-card .time{font-size:15px;}
+      .time-card h3{font-size:14px;line-height:1.22;}
+      .time-icon{width:54px;height:54px;}
+      .time-icon img{width:44px;height:44px;}
+      .time-row.left .time-icon{left:3.5%;}
+      .time-row.right .time-icon{left:96.5%;}
+      .time-emoji{font-size:29px;}
+      .time-emoji.question{font-size:37px;}
+      .time-deco{width:60px;height:60px;}
+      .time-deco.small{width:60px;height:60px;}
+      .row-bubble{width:132px;height:76px;}
+      .row-bubble span{font-size:9.5px;line-height:1.22;}
+      .row-bubble.right-side{right:1%;top:4%;}
+      .row-bubble.left-side{left:1%;top:4%;}
+      .time-row.last{min-height:180px;}
+      .time-row.last .time-card{top:28px;}
+    }
+
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
       .hero-poster{animation:none;opacity:1;transform:none;filter:none}
       .bottom-nav,.floating-booking{transition:none}
     }
 
-    @media (max-width:780px){
-      section{padding:86px 0}
-      #about{padding-top:95px}
-      .bottom-nav{bottom:8px;border-radius:19px}
-      .nav-item span{font-size:9px}.nav-art{width:35px;height:35px}
-      .time-row{min-height:212px}
-      .time-row:not(.last)::after{top:74%;height:2px}
-      .time-row.left::after{width:38%}.time-row.right::after{width:38%}
-      .time-card{width:39%;bottom:24%;padding:0 2px;background:transparent}
-      .time-row.left .time-card{right:calc(50% + 12px)}
-      .time-row.right .time-card{left:calc(50% + 12px)}
-      .time-icon{width:62px;height:62px;top:74%}.time-icon img{width:52px;height:52px}
-      .time-row.left .time-icon{left:10%}.time-row.right .time-icon{left:90%}
-      .time-card h3{font-size:18px;line-height:1.12}.time-card .time{font-size:17px;margin-bottom:5px}.time-card p{font-size:9px}
-      .timeline-wrap::before{bottom:0}
-      .time-row.last{min-height:178px}.time-row.last .time-card{width:max-content;max-width:86%;top:22px;bottom:auto;padding:2px 12px 5px}.time-row.last .time-icon{top:74%}
-      .time-row.last::after{display:none}
-      .about-paper p{font-size:16px;line-height:2}
-      .menu-stage{min-height:470px}.menu-book-btn{width:min(450px,92vw)}
-      .menu-book-overlay{left:18%;width:62%;top:31%}
-      .menu-book-overlay .big{font-size:clamp(27px,7vw,44px)}.menu-book-overlay .small{font-size:8px;margin-top:13px}
-      .map-frame,.map-frame iframe{min-height:330px;height:330px}
-      .noren-booking{width:min(460px,94vw)}
-      .noren-label{font-size:clamp(24px,6vw,34px);top:49%}
-      .floating-booking{right:12px;bottom:88px;width:84px;height:84px}
-      .sns-grid{grid-template-columns:repeat(2,1fr);gap:24px 22px}
-      .sns-card{padding:11px 12px 12px}
-      .book-spread{grid-template-columns:1fr;max-height:84vh}
-      .page{padding:26px 20px}.page:first-child{border-right:0;border-bottom:1px solid rgba(69,39,16,.16)}.page h3{font-size:34px}
-      .book-scene{width:min(720px,95vw)}
-      .archive-copy{left:12%;right:12%;top:19%;bottom:13%;gap:0}
-      .board-item{font-size:clamp(19px,6.5vw,32px);padding:14px 6px}
-      .archive-modal{padding:26px 16px 22px}
-      .archive-grid{grid-template-columns:1fr;gap:18px}
-      .archive-card{padding:10px}
-      .archive-card img{aspect-ratio:1 / 1.45}
-      .archive-card h4{font-size:25px;margin-top:11px}
-    }
   </style>
 </head>
 <body>
@@ -533,11 +752,10 @@
       <div class="wrap">
         <header class="section-head"><h2 class="hand">イベントについて</h2></header>
         <div class="about-paper">
-          <p>🍺🎭 うましかやろう BAR＆居酒屋 Part 2 は、うましかやろうとお客様が、お酒や食事を楽しみながら気軽に交流できるイベントです。</p>
-          <p>🎲🍻 普段の公演とは少し違った距離感で、劇団員とお客様が一緒になってゲームを楽しんだり、会話をしたりしながら、楽しい時間を過ごしていただける場を目指しています。</p>
-          <p>✨🎬 また、来年に予定している劇団うましかやろうの本公演についても、イベントを通して少しでも多くの方に知っていただき、「次の公演も観に行ってみたい」と思っていただけるきっかけを作ります。</p>
-          <p>🍺🍢 お酒を飲んで、食べて、遊んで、笑って。</p>
-          <p>😊🎉 劇場では味わえない、劇団とお客様との距離の近さを楽しんでいただく一日です。</p>
+          <p>劇場とはまた違う、うましかやろうの一面を楽しんでみませんか？</p>
+          <p>12月5日（土）は、いつもの舞台を飛び出して、<br>うましかやろうのメンバーと一緒に飲んで、笑って、遊べる一日！</p>
+          <p>お酒を片手に劇団員とおしゃべりしたり、<br>お客様参加型のゲームで盛り上がったり……<br>舞台ではなかなか見られない、うましかやろうとの距離の近い時間をお届けします！</p>
+          <p>🎯 お客様参加型ゲームも盛りだくさん！</p>
         </div>
       </div>
     </section>
@@ -546,44 +764,67 @@
       <div class="wrap">
         <header class="section-head"><h2 class="hand">タイムテーブル</h2></header>
         <div class="timeline-wrap">
-          <div class="time-row left">
+          <div class="time-row left has-bubble">
             <div class="time-card"><div class="time">15:00～</div><h3 class="hand">受付開始</h3></div>
-            <div class="time-icon"><img src="assets/cheers.png" alt="乾杯のイラスト"></div>
+            <div class="time-icon"><img src="assets/cheers.png" alt="受付開始・乾杯のイラスト"></div>
+            <div class="time-deco right small"><img src="https://2.bp.blogspot.com/-g0tX6LwKRvU/UgSL9bM2b9I/AAAAAAAAW4g/j8GETOhjCCA/s800/drink_beer.png" alt="ビールのイラスト" onerror="this.onerror=null;this.src='assets/beer.png'"></div>
+            <div class="row-bubble right-side bubble-oval">
+              <img src="assets/bubble-oval-left.png" alt="">
+              <span class="hand">舞台の話と酒は合う！！</span>
+            </div>
           </div>
 
           <div class="time-row right">
-            <div class="time-card"><div class="time">15:30～</div><h3 class="hand">ゲーム①<br>NGワードゲーム スタート</h3></div>
-            <div class="time-icon"><img src="assets/beer.png" alt="ビールのイラスト"></div>
+            <div class="time-card"><div class="time">15:30～</div><h3 class="hand">ゲーム①<br>NGワード言っちゃダメよゲーム</h3></div>
+            <div class="time-icon"><span class="time-emoji" aria-hidden="true">🎮</span></div>
+            <div class="time-deco left tilt-more"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyF9imuoxoZv8ZVxABsPoP3qAbuAeypjPnjOVhtnrABhLPcrhuPDmuwv4VjVKOguH-fPsCg-EclnkFTfEqsLzp2uRgkStR9gUSZuMNUn90mTEkULbldhwZsFnxF5BWCapGOkAB2i6Z1LI/s500/drink_cocktail.png" alt="カクテルのイラスト" onerror="this.onerror=null;this.src='assets/beer.png'"></div>
           </div>
 
-          <div class="time-row left">
-            <div class="time-card"><div class="time">16:30～</div><h3 class="hand">ゲーム②<br>絵本の文章一部隠して当てるゲーム</h3></div>
-            <div class="time-icon"><img src="assets/edamame.png" alt="枝豆のイラスト"></div>
+          <div class="time-row left has-bubble">
+            <div class="time-card"><div class="time">16:30～</div><h3 class="hand">ゲーム②<br>書籍シリーズ・虫食いクイズ</h3></div>
+            <div class="time-icon"><span class="time-emoji" aria-hidden="true">🎮</span></div>
+            <div class="time-deco right lower small"><img src="assets/bingo.png" alt="ビンゴのイラスト"></div>
+            <div class="row-bubble right-side bubble-cloud">
+              <img src="assets/bubble-cloud.png" alt="">
+              <span class="hand">騒がしい一日を🔥</span>
+            </div>
           </div>
 
           <div class="time-row right">
             <div class="time-card"><div class="time">18:30～</div><h3 class="hand">おでん・カレー<br>提供開始</h3></div>
-            <div class="time-icon"><img src="assets/oden.png" alt="おでんのイラスト"></div>
+            <div class="time-icon"><img src="assets/odencurry.png" alt="おでん・カレーのイラスト"></div>
+            <div class="time-deco left lower small"><img src="https://2.bp.blogspot.com/-g0tX6LwKRvU/UgSL9bM2b9I/AAAAAAAAW4g/j8GETOhjCCA/s800/drink_beer.png" alt="ビールのイラスト" onerror="this.onerror=null;this.src='assets/beer.png'"></div>
           </div>
 
           <div class="time-row left">
-            <div class="time-card"><div class="time">19:15～</div><h3 class="hand">ゲーム③<br>ビンゴ大会</h3></div>
-            <div class="time-icon"><img src="assets/beer.png" alt="ビールのイラスト"></div>
+            <div class="time-card"><div class="time">19:15～</div><h3 class="hand">ゲーム③<br>ビンゴゲーム</h3></div>
+            <div class="time-icon"><span class="time-emoji" aria-hidden="true">🎮</span></div>
+            <div class="time-deco right small"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyF9imuoxoZv8ZVxABsPoP3qAbuAeypjPnjOVhtnrABhLPcrhuPDmuwv4VjVKOguH-fPsCg-EclnkFTfEqsLzp2uRgkStR9gUSZuMNUn90mTEkULbldhwZsFnxF5BWCapGOkAB2i6Z1LI/s500/drink_cocktail.png" alt="カクテルのイラスト" onerror="this.onerror=null;this.src='assets/beer.png'"></div>
           </div>
 
-          <div class="time-row right">
+          <div class="time-row right has-bubble">
             <div class="time-card"><div class="time">20:30～</div><h3 class="hand">NGワード発表</h3></div>
-            <div class="time-icon"><img src="assets/curry.png" alt="カレーのイラスト"></div>
+            <div class="time-icon"><img src="assets/megaphone.png" alt="NGワード発表・メガホンのイラスト"></div>
+            <div class="time-deco left lower small"><img src="https://2.bp.blogspot.com/-g0tX6LwKRvU/UgSL9bM2b9I/AAAAAAAAW4g/j8GETOhjCCA/s800/drink_beer.png" alt="ビールのイラスト" onerror="this.onerror=null;this.src='assets/beer.png'"></div>
+            <div class="row-bubble left-side bubble-oval2">
+              <img src="assets/bubble-oval-right.png" alt="">
+              <span class="hand">来年の告知聞かせて👂</span>
+            </div>
           </div>
 
-          <div class="time-row left">
+          <div class="time-row left has-bubble">
             <div class="time-card"><div class="time">21:30～</div><h3 class="hand"><span class="secret-stars" aria-label="非公開の情報">✨✨✨</span>解禁</h3></div>
-            <div class="time-icon"><img src="assets/cheers.png" alt="乾杯のイラスト"></div>
+            <div class="time-icon"><span class="time-emoji question" aria-hidden="true">？</span></div>
+            <div class="time-deco right lower small"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyF9imuoxoZv8ZVxABsPoP3qAbuAeypjPnjOVhtnrABhLPcrhuPDmuwv4VjVKOguH-fPsCg-EclnkFTfEqsLzp2uRgkStR9gUSZuMNUn90mTEkULbldhwZsFnxF5BWCapGOkAB2i6Z1LI/s500/drink_cocktail.png" alt="カクテルのイラスト" onerror="this.onerror=null;this.src='assets/beer.png'"></div>
+            <div class="row-bubble right-side bubble-burst">
+              <img src="assets/bubble-burst.png" alt="">
+              <span class="hand">最後の最後に馬鹿しよう！！</span>
+            </div>
           </div>
 
           <div class="time-row last">
             <div class="time-card"><div class="time">22:00～</div><h3 class="hand">ラストオーダー</h3></div>
-            <div class="time-icon"><img src="assets/beer.png" alt="ビールのイラスト"></div>
+            <div class="time-icon"><img src="assets/lastorder.png" alt="ラストオーダー・ビールのイラスト"></div>
           </div>
         </div>
         <div class="brush-note">※タイムテーブルは当日の進行により変更となる場合があります。</div>
@@ -738,6 +979,12 @@
   </div>
 
   <script>
+    // Always open/reload the page at the hero image instead of restoring a previous scroll position.
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    const forceTop = () => { window.scrollTo(0, 0); };
+    window.addEventListener("load", () => requestAnimationFrame(forceTop));
+    window.addEventListener("pageshow", () => requestAnimationFrame(forceTop));
+
     const root = document.body;
     const booking = document.getElementById('floatingBooking');
     function onScroll(){
