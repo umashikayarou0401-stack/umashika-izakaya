@@ -228,42 +228,6 @@
     .time-row.last .time-icon{left:50%;top:74%;z-index:3}
     .time-row.last::after{display:none}
     .brush-note{margin:20px auto 0;max-width:720px;text-align:center;font-size:12px;opacity:.55}
-    /* ===== TIMELINE SPEECH BUBBLES ===== */
-    .row-bubble{
-      position:absolute;
-      width:210px;
-      height:116px;
-      display:grid;
-      place-items:center;
-      z-index:2;
-      pointer-events:none;
-    }
-    .row-bubble img{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      filter:drop-shadow(0 7px 10px rgba(55,31,13,.10));
-    }
-    .row-bubble span{
-      position:relative;
-      z-index:1;
-      width:72%;
-      margin-top:-2px;
-      text-align:center;
-      font-size:15px;
-      line-height:1.35;
-      color:var(--ink);
-      -webkit-text-stroke:.22px currentColor;
-      text-shadow:0 .25px 0 currentColor;
-    }
-    .row-bubble.right-side{right:4%;top:16%;}
-    .row-bubble.left-side{left:4%;top:16%;}
-    .row-bubble.bubble-oval{transform:rotate(-2deg)}
-    .row-bubble.bubble-cloud{transform:rotate(2deg)}
-    .row-bubble.bubble-oval2{transform:rotate(3deg)}
-    .row-bubble.bubble-burst{transform:rotate(-4deg)}
 
     /* ===== MENU ===== */
     .menu-stage{display:grid;place-items:center;min-height:590px}
@@ -581,7 +545,6 @@
       .time-deco.lower{top:60%}
       .time-deco.small{width:56px;height:56px}
 
-
       .menu-stage{min-height:400px}
       .menu-book-btn{width:min(430px,92vw)}
       .menu-book-overlay{left:18%;width:62%;top:31%}
@@ -645,8 +608,6 @@
       .time-row.last{min-height:176px}
       .time-row.last .time-card h3{font-size:19px}
       .time-deco{width:54px;height:54px}.time-deco.small{width:48px;height:48px}
-
-
       .sns-card{min-height:94px}
       .sns-icon{width:32px;height:32px}
       .sns-text strong{font-size:13px}
@@ -661,75 +622,6 @@
       .timeline-wrap .time-row.right .time-icon{left:93%;z-index:5}
       .timeline-wrap .time-card h3{font-size:15px;line-height:1.22}
       .timeline-wrap .time-card .time{font-size:15px}
-    }
-
-    /* Final smartphone timeline pass: use the full screen width, keep the spine clean, and reserve the outer corners for decorative art/bubbles. */
-    @media (max-width:780px){
-      .timeline-wrap{width:100%;max-width:100%;padding-inline:0;}
-      .timeline-wrap::before{left:50%;width:3px;top:0;bottom:150px;}
-      .time-row{min-height:176px;position:relative;}
-      .time-row:not(.last)::after{top:50%;height:2px;background:var(--line);z-index:1;}
-      .time-row.left::after{right:50%;left:auto;width:47%;}
-      .time-row.right::after{left:50%;right:auto;width:47%;}
-
-      /* Each event gets one clean text block and one matching icon at the outer end of its branch. */
-      .time-card{width:39%;top:50%;z-index:6;padding:0;transform:translateY(-50%);background:transparent;}
-      .time-row.left .time-card{left:12%;right:auto;text-align:left;}
-      .time-row.right .time-card{left:51%;right:auto;text-align:left;}
-      .time-card .time{font-size:16px;line-height:1.05;margin-bottom:4px;white-space:nowrap;}
-      .time-card h3{font-size:15px;line-height:1.23;margin:0;overflow-wrap:anywhere;}
-      .time-card p{font-size:9px;line-height:1.35;}
-
-      .time-icon{width:58px;height:58px;top:50%;z-index:7;}
-      .time-row.left .time-icon{left:4%;}
-      .time-row.right .time-icon{left:96%;}
-      .time-icon img{width:48px;height:48px;}
-      .time-emoji{font-size:31px;}
-      .time-emoji.question{font-size:40px;}
-
-      /* Decorations live in the unused outer corner of a row instead of floating near the copy. */
-      .time-deco{width:68px;height:68px;z-index:2;opacity:.82;}
-      .time-deco.right{right:7%;left:auto;top:12%;}
-      .time-deco.left{left:7%;right:auto;top:62%;}
-      .time-deco.lower{top:62%;}
-      .time-deco.small{width:68px;height:68px;}
-      .time-row.has-bubble .time-deco{display:none;}
-
-      /* Speech bubbles sit in the opposite open half of the row and never cover the event copy. */
-      .row-bubble{width:146px;height:84px;z-index:2;}
-      .row-bubble span{width:70%;font-size:10.5px;line-height:1.25;letter-spacing:0;-webkit-text-stroke:.16px currentColor;}
-      .row-bubble.right-side{right:2%;left:auto;top:5%;}
-      .row-bubble.left-side{left:2%;right:auto;top:5%;}
-
-      .time-row.last{min-height:176px;}
-      .time-row.last .time-card{left:50%;top:30px;width:max-content;max-width:88%;padding:0 10px 5px;transform:translateX(-50%);z-index:8;}
-      .time-row.last .time-card .time{font-size:19px;}
-      .time-row.last .time-card h3{font-size:20px;white-space:nowrap;}
-      .time-row.last .time-icon{left:50%;top:74%;width:58px;height:58px;}
-      .time-row.last::after{display:none;}
-    }
-
-    @media (max-width:390px){
-      .time-row{min-height:182px;}
-      .time-card{width:40%;}
-      .time-row.left .time-card{left:11%;}
-      .time-row.right .time-card{left:52%;}
-      .time-card .time{font-size:15px;}
-      .time-card h3{font-size:14px;line-height:1.22;}
-      .time-icon{width:54px;height:54px;}
-      .time-icon img{width:44px;height:44px;}
-      .time-row.left .time-icon{left:3.5%;}
-      .time-row.right .time-icon{left:96.5%;}
-      .time-emoji{font-size:29px;}
-      .time-emoji.question{font-size:37px;}
-      .time-deco{width:60px;height:60px;}
-      .time-deco.small{width:60px;height:60px;}
-      .row-bubble{width:132px;height:76px;}
-      .row-bubble span{font-size:9.5px;line-height:1.22;}
-      .row-bubble.right-side{right:1%;top:4%;}
-      .row-bubble.left-side{left:1%;top:4%;}
-      .time-row.last{min-height:180px;}
-      .time-row.last .time-card{top:28px;}
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -764,14 +656,10 @@
       <div class="wrap">
         <header class="section-head"><h2 class="hand">タイムテーブル</h2></header>
         <div class="timeline-wrap">
-          <div class="time-row left has-bubble">
+          <div class="time-row left">
             <div class="time-card"><div class="time">15:00～</div><h3 class="hand">受付開始</h3></div>
             <div class="time-icon"><img src="assets/cheers.png" alt="受付開始・乾杯のイラスト"></div>
             <div class="time-deco right small"><img src="https://2.bp.blogspot.com/-g0tX6LwKRvU/UgSL9bM2b9I/AAAAAAAAW4g/j8GETOhjCCA/s800/drink_beer.png" alt="ビールのイラスト" onerror="this.onerror=null;this.src='assets/beer.png'"></div>
-            <div class="row-bubble right-side bubble-oval">
-              <img src="assets/bubble-oval-left.png" alt="">
-              <span class="hand">舞台の話と酒は合う！！</span>
-            </div>
           </div>
 
           <div class="time-row right">
@@ -780,14 +668,10 @@
             <div class="time-deco left tilt-more"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyF9imuoxoZv8ZVxABsPoP3qAbuAeypjPnjOVhtnrABhLPcrhuPDmuwv4VjVKOguH-fPsCg-EclnkFTfEqsLzp2uRgkStR9gUSZuMNUn90mTEkULbldhwZsFnxF5BWCapGOkAB2i6Z1LI/s500/drink_cocktail.png" alt="カクテルのイラスト" onerror="this.onerror=null;this.src='assets/beer.png'"></div>
           </div>
 
-          <div class="time-row left has-bubble">
+          <div class="time-row left">
             <div class="time-card"><div class="time">16:30～</div><h3 class="hand">ゲーム②<br>書籍シリーズ・虫食いクイズ</h3></div>
             <div class="time-icon"><span class="time-emoji" aria-hidden="true">🎮</span></div>
             <div class="time-deco right lower small"><img src="assets/bingo.png" alt="ビンゴのイラスト"></div>
-            <div class="row-bubble right-side bubble-cloud">
-              <img src="assets/bubble-cloud.png" alt="">
-              <span class="hand">騒がしい一日を🔥</span>
-            </div>
           </div>
 
           <div class="time-row right">
@@ -802,24 +686,16 @@
             <div class="time-deco right small"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyF9imuoxoZv8ZVxABsPoP3qAbuAeypjPnjOVhtnrABhLPcrhuPDmuwv4VjVKOguH-fPsCg-EclnkFTfEqsLzp2uRgkStR9gUSZuMNUn90mTEkULbldhwZsFnxF5BWCapGOkAB2i6Z1LI/s500/drink_cocktail.png" alt="カクテルのイラスト" onerror="this.onerror=null;this.src='assets/beer.png'"></div>
           </div>
 
-          <div class="time-row right has-bubble">
+          <div class="time-row right">
             <div class="time-card"><div class="time">20:30～</div><h3 class="hand">NGワード発表</h3></div>
             <div class="time-icon"><img src="assets/megaphone.png" alt="NGワード発表・メガホンのイラスト"></div>
             <div class="time-deco left lower small"><img src="https://2.bp.blogspot.com/-g0tX6LwKRvU/UgSL9bM2b9I/AAAAAAAAW4g/j8GETOhjCCA/s800/drink_beer.png" alt="ビールのイラスト" onerror="this.onerror=null;this.src='assets/beer.png'"></div>
-            <div class="row-bubble left-side bubble-oval2">
-              <img src="assets/bubble-oval-right.png" alt="">
-              <span class="hand">来年の告知聞かせて👂</span>
-            </div>
           </div>
 
-          <div class="time-row left has-bubble">
+          <div class="time-row left">
             <div class="time-card"><div class="time">21:30～</div><h3 class="hand"><span class="secret-stars" aria-label="非公開の情報">✨✨✨</span>解禁</h3></div>
             <div class="time-icon"><span class="time-emoji question" aria-hidden="true">？</span></div>
             <div class="time-deco right lower small"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyF9imuoxoZv8ZVxABsPoP3qAbuAeypjPnjOVhtnrABhLPcrhuPDmuwv4VjVKOguH-fPsCg-EclnkFTfEqsLzp2uRgkStR9gUSZuMNUn90mTEkULbldhwZsFnxF5BWCapGOkAB2i6Z1LI/s500/drink_cocktail.png" alt="カクテルのイラスト" onerror="this.onerror=null;this.src='assets/beer.png'"></div>
-            <div class="row-bubble right-side bubble-burst">
-              <img src="assets/bubble-burst.png" alt="">
-              <span class="hand">最後の最後に馬鹿しよう！！</span>
-            </div>
           </div>
 
           <div class="time-row last">
