@@ -161,13 +161,15 @@
     #about{padding-top:120px}
     .about-paper{width:min(820px,100%);margin-inline:auto;padding:18px 16px 10px;text-align:center}
     .about-paper p{font-size:18px;line-height:2.15;margin:0 0 26px}
+    .about-paper p:first-child{font-size:20px}
+    .about-paper p::first-letter{font-size:1.12em}
     .about-paper p:last-child{margin-bottom:0}
     .about-paper strong{font-weight:900}
 
     /* ===== TIMELINE ===== */
     .timeline-wrap{position:relative;max-width:980px;margin:0 auto;padding-top:8px}
     .timeline-wrap::before{
-      content:"";position:absolute;top:0;bottom:124px;left:50%;width:3px;
+      content:"";position:absolute;top:0;bottom:0;left:50%;width:3px;
       transform:translateX(-50%);background:var(--line);z-index:0}
     .time-row{min-height:210px;position:relative}
     .time-row:not(.last)::after{
@@ -189,8 +191,9 @@
     .time-row.right .time-icon{left:84%}
     .time-icon img{width:74px;height:74px;object-fit:contain}
     .time-card .time{display:block;font-size:27px;font-weight:900;line-height:1;margin-bottom:7px;-webkit-text-stroke:.4px currentColor;text-shadow:0 .4px 0 currentColor}
-    .time-card h3{font-size:31px;margin:0 0 5px;line-height:1.08;-webkit-text-stroke:.4px currentColor;text-shadow:0 .4px 0 currentColor}
+    .time-card h3{font-size:31px;margin:0;line-height:1.08;-webkit-text-stroke:.4px currentColor;text-shadow:0 .4px 0 currentColor}
     .time-card p{font-size:13px;line-height:1.45;opacity:.68;margin:0}
+    .secret-stars{letter-spacing:.16em;white-space:nowrap;text-shadow:0 0 7px rgba(255,197,67,.75),0 0 14px rgba(255,239,144,.7)}
 
     .time-row.last{min-height:200px}
     .time-row.last .time-card{
@@ -280,18 +283,43 @@
     .archive-board{max-width:960px;margin:0 auto;position:relative}
     .archive-board img{display:block;width:100%;height:auto;filter:drop-shadow(0 24px 24px rgba(56,30,11,.18))}
     .archive-copy{
-      position:absolute;left:19%;right:19%;top:22%;bottom:18%;
-      display:grid;align-content:center;gap:22px;text-align:center;transform:rotate(-1deg)
+      position:absolute;left:18%;right:18%;top:23%;bottom:18%;
+      display:grid;align-content:center;gap:8px;text-align:center;transform:rotate(-1deg)
     }
-    .archive-title{font-size:clamp(30px,5vw,56px);line-height:1.05;margin:0 0 5px}
-    .board-items{display:grid;gap:10px}
+    .board-items{display:grid;gap:0}
     .board-item{
-      padding:10px 12px;border-bottom:2px dashed rgba(120,56,35,.32);
-      font-size:clamp(24px,3.8vw,42px);line-height:1.2
+      padding:18px 10px;border-bottom:2px dashed rgba(120,56,35,.30);
+      font-size:clamp(28px,4vw,46px);line-height:1.15
     }
-    .board-item a{text-decoration:none;display:inline-block}
-    .board-item a:hover{text-decoration:underline;text-underline-offset:6px}
-    .board-note{font-size:11px;opacity:.48;margin-top:2px}
+    .board-item:last-child{border-bottom:0}
+    .board-item a{
+      text-decoration:none;display:inline-block;position:relative;padding:4px 10px 8px;
+      transition:transform .18s ease, filter .18s ease
+    }
+    .board-item a::after{content:"↗";font-size:.42em;display:inline-block;margin-left:.35em;transform:translateY(-.15em);opacity:.7}
+    .board-item a:hover{transform:translateY(-2px) rotate(-.6deg);filter:brightness(1.08)}
+
+    /* ===== ARCHIVE MODAL ===== */
+    .archive-modal-scene{width:min(980px,94vw);max-height:90vh;overflow:auto}
+    .archive-modal{
+      position:relative;padding:34px 28px 30px;background:#f7ead1;
+      border:2px solid rgba(58,31,12,.18);box-shadow:0 28px 70px rgba(0,0,0,.30);
+      transform:rotate(.35deg)
+    }
+    .archive-modal h3{font-size:clamp(34px,6vw,58px);line-height:1;margin:0;text-align:center}
+    .archive-modal h3::after{content:"";display:block;width:110px;border-bottom:4px solid var(--ink);margin:12px auto 24px;transform:rotate(-2deg);border-radius:50%}
+    .archive-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+    .archive-card{
+      background:rgba(255,250,240,.78);border:1px solid rgba(80,46,23,.16);
+      padding:12px;box-shadow:0 10px 20px rgba(60,35,17,.10);
+      transform:rotate(-.5deg);
+    }
+    .archive-card:nth-child(2){transform:rotate(.6deg)}
+    .archive-card img{display:block;width:100%;height:auto;aspect-ratio:1 / 1.48;object-fit:cover;border:1px solid rgba(70,40,20,.12)}
+    .archive-card h4{font-size:clamp(22px,3.4vw,32px);line-height:1.15;margin:14px 4px 5px;text-align:center}
+    .archive-card p{font-size:12px;line-height:1.7;margin:0;text-align:center;opacity:.66}
+    .archive-card .archive-tag{display:inline-block;margin:10px auto 0;padding:4px 10px;border:1px solid rgba(120,56,35,.35);border-radius:999px;font-size:10px;opacity:.72}
+    .archive-card .tag-wrap{text-align:center}
 
     footer{padding:80px 0 130px;text-align:center}
     footer .hand{font-size:26px}
@@ -331,6 +359,16 @@
     .book-close{position:absolute;right:-8px;top:-8px;width:46px;height:46px;border:2px solid var(--ink);border-radius:50%;background:#f8ecd4;cursor:pointer;font-size:20px;z-index:4}
     .modal-seal{margin:28px auto 0;width:72px;height:72px;border:2px solid var(--red);color:var(--red);border-radius:50%;display:grid;place-items:center;transform:rotate(7deg);font-size:12px;text-align:center}
 
+    .menu-announcement-scene{width:min(640px,92vw)}
+    .menu-announcement{position:relative;text-align:center;padding:72px 42px 64px;background:#f8ecd4;border:2px solid rgba(58,31,12,.2);box-shadow:0 28px 70px rgba(0,0,0,.3);transform:rotate(-1deg)}
+    .menu-announcement::before,.menu-announcement::after{content:"";position:absolute;width:110px;height:10px;border-bottom:4px solid var(--red);opacity:.55}
+    .menu-announcement::before{left:36px;top:30px;transform:rotate(-3deg)}
+    .menu-announcement::after{right:36px;bottom:30px;transform:rotate(4deg)}
+    .announcement-mark{font-size:46px;margin-bottom:10px}
+    .menu-announcement h3{font-size:clamp(42px,7vw,66px);margin:0 0 18px;line-height:1}
+    .announcement-lead{font-size:clamp(28px,5vw,44px);margin:0 0 16px;line-height:1.2}
+    .announcement-sub{font-size:15px;line-height:2;margin:0;opacity:.72}
+
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
       .hero-poster{animation:none;opacity:1;transform:none;filter:none}
@@ -342,16 +380,16 @@
       #about{padding-top:95px}
       .bottom-nav{bottom:8px;border-radius:19px}
       .nav-item span{font-size:9px}.nav-art{width:35px;height:35px}
-      .time-row{min-height:184px}
+      .time-row{min-height:212px}
       .time-row:not(.last)::after{top:74%;height:2px}
-      .time-row.left::after{width:37%}.time-row.right::after{width:37%}
-      .time-card{width:35%;bottom:25%;padding:0 2px;background:transparent}
-      .time-row.left .time-card{right:calc(50% + 15px)}
-      .time-row.right .time-card{left:calc(50% + 15px)}
+      .time-row.left::after{width:38%}.time-row.right::after{width:38%}
+      .time-card{width:39%;bottom:24%;padding:0 2px;background:transparent}
+      .time-row.left .time-card{right:calc(50% + 12px)}
+      .time-row.right .time-card{left:calc(50% + 12px)}
       .time-icon{width:62px;height:62px;top:74%}.time-icon img{width:52px;height:52px}
-      .time-row.left .time-icon{left:11%}.time-row.right .time-icon{left:89%}
-      .time-card h3{font-size:21px}.time-card .time{font-size:19px}.time-card p{font-size:9px}
-      .timeline-wrap::before{bottom:108px}
+      .time-row.left .time-icon{left:10%}.time-row.right .time-icon{left:90%}
+      .time-card h3{font-size:18px;line-height:1.12}.time-card .time{font-size:17px;margin-bottom:5px}.time-card p{font-size:9px}
+      .timeline-wrap::before{bottom:0}
       .time-row.last{min-height:178px}.time-row.last .time-card{width:max-content;max-width:86%;top:22px;bottom:auto;padding:2px 12px 5px}.time-row.last .time-icon{top:74%}
       .time-row.last::after{display:none}
       .about-paper p{font-size:16px;line-height:2}
@@ -367,10 +405,13 @@
       .book-spread{grid-template-columns:1fr;max-height:84vh}
       .page{padding:26px 20px}.page:first-child{border-right:0;border-bottom:1px solid rgba(69,39,16,.16)}.page h3{font-size:34px}
       .book-scene{width:min(720px,95vw)}
-      .archive-copy{left:13%;right:13%;top:16%;bottom:15%;gap:12px}
-      .archive-title{font-size:clamp(25px,7vw,38px)}
-      .board-item{font-size:clamp(19px,6.4vw,31px);padding:8px 8px}
-      .board-note{display:none}
+      .archive-copy{left:12%;right:12%;top:19%;bottom:13%;gap:0}
+      .board-item{font-size:clamp(19px,6.5vw,32px);padding:14px 6px}
+      .archive-modal{padding:26px 16px 22px}
+      .archive-grid{grid-template-columns:1fr;gap:18px}
+      .archive-card{padding:10px}
+      .archive-card img{aspect-ratio:1 / 1.45}
+      .archive-card h4{font-size:25px;margin-top:11px}
     }
   </style>
 </head>
@@ -386,9 +427,11 @@
       <div class="wrap">
         <header class="section-head"><h2 class="hand">イベントについて</h2></header>
         <div class="about-paper">
-          <p>「BAR＆居酒屋 Part 2」は、劇団 <strong>うましかやろう</strong> がひらく一日限定の居酒屋イベント。</p>
-          <p>昼からふらっと遊びに来ても、夜までゆっくり過ごしてもOK。おでんとカレーの提供は<strong>18:30〜</strong>を予定しています。</p>
-          <p>劇団を知っている人も、はじめましての人も、同じテーブルで乾杯しましょう。</p>
+          <p>🍺🎭 うましかやろう BAR＆居酒屋 Part 2 は、うましかやろうとお客様が、お酒や食事を楽しみながら気軽に交流できるイベントです。</p>
+          <p>🎲🍻 普段の公演とは少し違った距離感で、劇団員とお客様が一緒になってゲームを楽しんだり、会話をしたりしながら、楽しい時間を過ごしていただける場を目指しています。</p>
+          <p>✨🎬 また、来年に予定している劇団うましかやろうの本公演についても、イベントを通して少しでも多くの方に知っていただき、「次の公演も観に行ってみたい」と思っていただけるきっかけを作ります。</p>
+          <p>🍺🍢 お酒を飲んで、食べて、遊んで、笑って。</p>
+          <p>😊🎉 劇場では味わえない、劇団とお客様との距離の近さを楽しんでいただく一日です。</p>
         </div>
       </div>
     </section>
@@ -398,36 +441,46 @@
         <header class="section-head"><h2 class="hand">タイムテーブル</h2></header>
         <div class="timeline-wrap">
           <div class="time-row left">
-            <div class="time-card"><div class="time">15:00</div><h3 class="hand">OPEN</h3><p>まずは乾杯。ゆっくりスタート。</p></div>
+            <div class="time-card"><div class="time">15:00～</div><h3 class="hand">受付開始</h3></div>
             <div class="time-icon"><img src="assets/cheers.png" alt="乾杯のイラスト"></div>
           </div>
 
           <div class="time-row right">
-            <div class="time-card"><div class="time">TIME 01</div><h3 class="hand">イベント①</h3><p>ここは内容決定後に更新。</p></div>
+            <div class="time-card"><div class="time">15:30～</div><h3 class="hand">ゲーム①<br>NGワードゲーム スタート</h3></div>
             <div class="time-icon"><img src="assets/beer.png" alt="ビールのイラスト"></div>
           </div>
 
           <div class="time-row left">
-            <div class="time-card"><div class="time">18:30</div><h3 class="hand">おでん・カレー<br>START</h3><p>あったかい特別メニューをどうぞ。</p></div>
-            <div class="time-icon"><img src="assets/oden.png" alt="おでんのイラスト"></div>
-          </div>
-
-          <div class="time-row right">
-            <div class="time-card"><div class="time">TIME 02</div><h3 class="hand">イベント②</h3><p>ここは内容決定後に更新。</p></div>
+            <div class="time-card"><div class="time">16:30～</div><h3 class="hand">ゲーム②<br>絵本の文章一部隠して当てるゲーム</h3></div>
             <div class="time-icon"><img src="assets/edamame.png" alt="枝豆のイラスト"></div>
           </div>
 
+          <div class="time-row right">
+            <div class="time-card"><div class="time">18:30～</div><h3 class="hand">おでん・カレー<br>提供開始</h3></div>
+            <div class="time-icon"><img src="assets/oden.png" alt="おでんのイラスト"></div>
+          </div>
+
           <div class="time-row left">
-            <div class="time-card"><div class="time">22:00</div><h3 class="hand">LAST ORDER</h3><p>ご注文は22:00まで。</p></div>
+            <div class="time-card"><div class="time">19:15～</div><h3 class="hand">ゲーム③<br>ビンゴ大会</h3></div>
             <div class="time-icon"><img src="assets/beer.png" alt="ビールのイラスト"></div>
           </div>
 
-          <div class="time-row last">
-            <div class="time-card"><div class="time">22:30</div><h3 class="hand">CLOSE</h3><p>また次の夜に。</p></div>
+          <div class="time-row right">
+            <div class="time-card"><div class="time">20:30～</div><h3 class="hand">NGワード発表</h3></div>
             <div class="time-icon"><img src="assets/curry.png" alt="カレーのイラスト"></div>
           </div>
+
+          <div class="time-row left">
+            <div class="time-card"><div class="time">21:30～</div><h3 class="hand"><span class="secret-stars" aria-label="非公開の情報">✨✨✨</span>解禁</h3></div>
+            <div class="time-icon"><img src="assets/cheers.png" alt="乾杯のイラスト"></div>
+          </div>
+
+          <div class="time-row right">
+            <div class="time-card"><div class="time">22:00～</div><h3 class="hand">ラストオーダー</h3></div>
+            <div class="time-icon"><img src="assets/beer.png" alt="ビールのイラスト"></div>
+          </div>
         </div>
-        <div class="brush-note">※タイムテーブルは仮組みです。確定した時刻・企画名へ差し替え可能です。</div>
+        <div class="brush-note">※タイムテーブルは当日の進行により変更となる場合があります。</div>
       </div>
     </section>
 
@@ -469,51 +522,58 @@
       <div class="wrap">
         <header class="section-head"><h2 class="hand">ご予約</h2></header>
         <div class="reservation-inner">
-          <a class="noren-booking" href="https://example.com/reservation" target="_blank" rel="noopener" aria-label="予約フォームを開く">
+          <a class="noren-booking" href="https://www.quartet-online.net/ticket/umashikabar2" target="_blank" rel="noopener" aria-label="予約フォームを開く">
             <span class="noren-pair" aria-hidden="true">
               <span class="noren-half noren-left"><img src="assets/noren-booking.png" alt=""></span>
               <span class="noren-half noren-right"><img src="assets/noren-booking.png" alt=""></span>
             </span>
             <span class="noren-label hand">予約はこちら</span>
           </a>
-          <p class="reserve-note">予約フォームURLが決まったら、このリンク先だけ差し替えればOKです。</p>
+          <p class="reserve-note">予約はこちらから。</p>
         </div>
       </div>
     </section>
 
     <section id="sns">
       <div class="wrap">
-        <header class="section-head"><h2 class="hand">うましかやろう SNS</h2></header>
+        <header class="section-head"><h2 class="hand">うましかやろう SNS</h2><p>🌐 公式サイト ／ 💚 LINE ／ 𝕏 X ／ ◎ Instagram ／ 📝 ブログ ／ f Facebook</p></header>
         <div class="sns-grid">
           <a class="sns-card" href="https://umashikayarou.jimdofree.com/" target="_blank" rel="noopener" aria-label="うましかやろう 公式サイト">
             <div class="sns-text"><strong class="hand">公式サイト</strong><br><span>劇団のホームページ</span></div>
             <div class="sns-icon"><img src="assets/website.svg" alt="公式サイト"></div>
           </a>
-          <a class="sns-card" href="https://line.me/" target="_blank" rel="noopener" aria-label="うましかやろう 公式LINE">
-            <div class="sns-text"><strong class="hand">公式LINE</strong><br><span>お知らせ・予約</span></div>
+          <a class="sns-card" href="https://torutexiya.github.io/umashika-line/" target="_blank" rel="noopener" aria-label="うましかやろう 公式LINE">
+            <div class="sns-text"><strong class="hand">公式LINE</strong><br><span>友だち追加・お知らせ</span></div>
             <div class="sns-icon"><img src="assets/line-official.svg" alt="LINE"></div>
           </a>
           <a class="sns-card" href="https://x.com/umashikayarou01" target="_blank" rel="noopener" aria-label="うましかやろう 公式X">
             <div class="sns-text"><strong class="hand">公式X</strong><br><span>最新情報・日々のこと</span></div>
             <div class="sns-icon"><img src="assets/x-official.svg" alt="X"></div>
           </a>
-          <a class="sns-card" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="うましかやろう 公式Instagram">
+          <a class="sns-card" href="https://www.instagram.com/umashikayarou3/" target="_blank" rel="noopener" aria-label="うましかやろう 公式Instagram">
             <div class="sns-text"><strong class="hand">公式Instagram</strong><br><span>写真・お知らせ</span></div>
             <div class="sns-icon"><img src="assets/instagram-official.svg" alt="Instagram"></div>
+          </a>
+          <a class="sns-card" href="https://ameblo.jp/umashika-yarou/" target="_blank" rel="noopener" aria-label="うましかやろうの馬鹿ブログ">
+            <div class="sns-text"><strong class="hand">公式ブログ</strong><br><span>うましかやろうの馬鹿ブログ</span></div>
+            <div class="sns-icon"><img src="assets/ameba.svg" alt="Ameba"></div>
+          </a>
+          <a class="sns-card" href="https://www.facebook.com/umashikayarou/" target="_blank" rel="noopener" aria-label="うましかやろう Facebook">
+            <div class="sns-text"><strong class="hand">Facebook</strong><br><span>劇団からのお知らせ</span></div>
+            <div class="sns-icon"><img src="assets/facebook-official.svg" alt="Facebook"></div>
           </a>
         </div>
       </div>
     </section>
 
-    <section id="archive">
+    <section id="archive" aria-label="過去の公演とイベント">
       <div class="wrap">
         <div class="archive-board">
           <img src="assets/wall-menu.png" alt="居酒屋の壁掛けメニュー風イラスト">
           <div class="archive-copy">
-            <h2 class="archive-title hand">過去の公演とイベント</h2>
             <div class="board-items">
-              <div class="board-item"><a href="#" class="hand">過去の公演　↗</a></div>
-              <div class="board-item"><a href="#" class="hand">過去のイベント　↗</a></div>
+              <div class="board-item"><a href="https://umashikayarou.jimdofree.com/%E5%87%BA%E6%BC%94%E6%83%85%E5%A0%B1/" target="_blank" rel="noopener" class="hand">過去の公演</a></div>
+              <div class="board-item"><a href="#" id="pastEventsOpen" class="hand">過去のイベント</a></div>
             </div>
           </div>
         </div>
@@ -526,7 +586,30 @@
     <small>© <span id="year"></span> うましかやろう</small>
   </footer>
 
-  <a id="floatingBooking" class="floating-booking hand" href="#reservation" aria-label="予約はこちら">予約<br>はこちら</a>
+  <a id="floatingBooking" class="floating-booking hand" href="https://www.quartet-online.net/ticket/umashikabar2" target="_blank" rel="noopener" aria-label="予約はこちら">予約<br>はこちら</a>
+
+  <div id="archiveModal" class="modal" aria-hidden="true">
+    <div class="book-scene archive-modal-scene" role="dialog" aria-modal="true" aria-labelledby="archiveModalTitle">
+      <button class="book-close" type="button" aria-label="閉じる">×</button>
+      <div class="archive-modal">
+        <h3 class="hand" id="archiveModalTitle">過去のイベント</h3>
+        <div class="archive-grid">
+          <article class="archive-card">
+            <img src="assets/archive/event2-mike-neko.jpg" alt="初代ミケ猫シスターズ上映会のチラシ">
+            <div class="tag-wrap"><span class="archive-tag">2回目のイベント</span></div>
+            <h4 class="hand">初代ミケ猫シスターズ上映会</h4>
+            <p>2025年3月8日（土）</p>
+          </article>
+          <article class="archive-card">
+            <img src="assets/archive/event1-bar-izakaya.jpg" alt="うましか Bar & 居酒屋のチラシ">
+            <div class="tag-wrap"><span class="archive-tag">1回目のイベント</span></div>
+            <h4 class="hand">うましか Bar &amp; 居酒屋</h4>
+            <p>2024年7月27日（土）</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <nav class="bottom-nav" aria-label="ページ内ショートカット">
     <a class="nav-item" href="#about"><img class="nav-art" src="assets/cheers.png" alt=""><span class="hand">イベント</span></a>
@@ -537,32 +620,13 @@
   </nav>
 
   <div id="menuModal" class="modal" aria-hidden="true">
-    <div class="book-scene" role="dialog" aria-modal="true" aria-labelledby="menuModalTitle">
+    <div class="book-scene menu-announcement-scene" role="dialog" aria-modal="true" aria-labelledby="menuModalTitle">
       <button class="book-close" type="button" aria-label="閉じる">×</button>
-      <div class="book-spread">
-        <article class="page">
-          <h3 class="hand" id="menuModalTitle">お品書き</h3>
-          <div class="page-note">18:30〜 提供予定</div>
-          <div class="menu-lines">
-            <div class="menu-line"><b>大根</b><span>定番の一皿</span></div>
-            <div class="menu-line"><b>たまご</b><span>定番の一皿</span></div>
-            <div class="menu-line"><b>こんにゃく</b><span>定番の一皿</span></div>
-            <div class="menu-line"><b>練りもの各種</b><span>内容は当日のお楽しみ</span></div>
-          </div>
-          <div class="modal-seal">うま<br>しか</div>
-        </article>
-        <article class="page">
-          <h3 class="hand">カレー・ドリンク</h3>
-          <div class="page-note">内容は決まり次第更新します。</div>
-          <div class="menu-lines">
-            <div class="menu-line"><b>本日のカレー</b><span>内容は決まり次第更新</span></div>
-            <div class="menu-line"><b>トッピング</b><span>内容は決まり次第更新</span></div>
-            <div class="menu-line"><b>ビール</b><span>種類は決まり次第更新</span></div>
-            <div class="menu-line"><b>ハイボール・サワー</b><span>種類は決まり次第更新</span></div>
-            <div class="menu-line"><b>ソフトドリンク</b><span>種類は決まり次第更新</span></div>
-          </div>
-          <div class="modal-seal">Part<br>2</div>
-        </article>
+      <div class="menu-announcement">
+        <div class="announcement-mark">🍻</div>
+        <h3 class="hand" id="menuModalTitle">お品書き</h3>
+        <p class="announcement-lead hand">メニューは後日発表します！</p>
+        <p class="announcement-sub">楽しみにお待ちください。<br>当日のお楽しみも、ちょっとだけあります。</p>
       </div>
     </div>
   </div>
@@ -581,12 +645,20 @@
     const modal = document.getElementById('menuModal');
     const bookBtn = document.getElementById('menuBookBtn');
     const closeBtn = modal.querySelector('.book-close');
+    const archiveModal = document.getElementById('archiveModal');
+    const pastEventsOpen = document.getElementById('pastEventsOpen');
+    const archiveCloseBtn = archiveModal.querySelector('.book-close');
     function openMenu(){modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
     function closeMenu(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+    function openArchive(){archiveModal.classList.add('open');archiveModal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+    function closeArchive(){archiveModal.classList.remove('open');archiveModal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
     bookBtn.addEventListener('click', openMenu);
     closeBtn.addEventListener('click', closeMenu);
     modal.addEventListener('click', e=>{ if(e.target===modal) closeMenu(); });
-    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+    pastEventsOpen.addEventListener('click', e=>{ e.preventDefault(); openArchive(); });
+    archiveCloseBtn.addEventListener('click', closeArchive);
+    archiveModal.addEventListener('click', e=>{ if(e.target===archiveModal) closeArchive(); });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeMenu(); closeArchive(); } });
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
